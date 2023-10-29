@@ -1,0 +1,233 @@
+# The OS module in Python provides functions for interacting with the operating system.
+# OS comes under Python’s standard utility modules. This module provides a portable way
+# of using operating system-dependent functionality. The *os* and *os.path* modules include
+# many functions to interact with the file system.
+
+# 1. The Current Working Directory(CWD) as a folder, where the Python is operating.
+
+# Whenever the files are called only by their name, Python assumes that it starts in 
+# the CWD which means that name-only reference will be successful only if the file is in 
+# the Python’s CWD.
+# Note: The folder where the Python script is running is known as the Current Directory. 
+# This is not the path where the Python script is located.
+# To get the location of the current working directory os.getcwd() is used.
+
+# 2. Changing the Current working directory
+
+# To change the current working directory(CWD) os.chdir() method is used. This method 
+# changes the CWD to a specified path. It only takes a single argument as a new directory path.
+
+# 3. Creating a Directory
+# There are different methods available in the OS module for creating a directory. 
+# These are –
+    # 1. os.mkdir()
+    # 2. os.makedirs()
+
+# Sample..
+import os  
+      
+# Leaf directory  
+# directory = "Dinosaur"
+      
+# Parent Directories  
+# parent_dir = "C:/TestingOS"
+      
+# Path  
+# path = os.path.join(parent_dir, directory)  
+      
+# Create the directory  
+# 'Dinosaur'  
+# os.makedirs(path)  
+# print("Directory '% s' created" % directory)  
+
+# Listing out Files and Directories with Python
+
+# os.listdir() method in Python is used to get the list of all files and directories in
+# the specified directory. If we don’t specify any directory, then the list of files and
+# directories in the current working directory will be returned.
+
+path = "/"
+dir_list = os.listdir(path)  
+  
+print("Files and directories in '", path, "' :")  
+  
+# print the list  
+print(dir_list)  
+
+# Deleting Directory or Files using Python
+# OS module proves different methods for removing directories and files in Python. These are – 
+
+    # Using os.remove()
+    # Using os.rmdir()
+
+# Using os.remove()
+# os.remove() method in Python is used to remove or delete a file path. This method can not
+# remove or delete a directory. If the specified path is a directory then OSError will be
+# raised by the method.
+
+# Using os.rmdir()
+# os.rmdir() method in Python is used to remove or delete an empty directory. OSError will 
+# be raised if the specified path is not an empty directory.
+
+# File name  
+file = 'Testing.txt'
+      
+# File location  
+location = "C:\Machine Learning/"
+      
+# Path  
+path = os.path.join(location, file)  
+      
+# Remove the file  
+# 'file.txt'  
+
+# os.remove(path)  # This works.. 
+
+directory = "Dinosaur"
+      
+# Parent Directory  
+parent = "C:\TestingOS/"
+      
+# Path  
+path = os.path.join(parent, directory)  
+      
+# Remove the Directory  
+# "Geeks"  
+# os.rmdir(path)  # This works..
+
+
+#              * Commonly Used Functions
+# 1. os.name: This function gives the name of the operating system dependent module imported.
+# The following names have currently been registered: ‘posix’, ‘nt’, ‘os2’, ‘ce’, ‘java’ and
+# ‘riscos’.
+
+# 2. os.error: All functions in this module raise OSError in the case of invalid or 
+# inaccessible file names and paths, or other arguments that have the correct type,
+# but are not accepted by the operating system. os.error is an alias for built-in 
+# OSError exception. 
+
+fd = "GFG.txt"
+  
+# 3. os.popen() is similar to open() 
+# This method opens a pipe to or form command. The return value can be read or written
+# depending on whether the mode is ‘r’ or ‘w’. 
+file = open(fd, 'w') 
+file.write("Hello") 
+file.close() 
+file = open(fd, 'r') 
+text = file.read() 
+print(text)
+  
+# popen() provides a pipe/gateway and accesses the file directly 
+file = os.popen(fd, 'w') 
+file.write("Hello") 
+# File not closed, shown in next function
+
+# Closing the file is good pratice while left opened.
+# 4. os.close() 
+# Close file descriptor fd. A file opened using open(), can be closed by close() only.
+# But file opened through os.popen(), can be closed with close() or os.close(). If we
+# try closing a file opened with open(), using os.close(), Python would throw TypeError. 
+
+# 5. os.rename(): A file old.txt can be renamed to new.txt, using the function os.rename().
+# The name of the file changes only if, the file exists and the user has sufficient 
+# privilege permission to change the file.
+
+# Sample...
+
+# fd = "GFG.txt"
+# os.rename(fd,'Nw.txt') # This works..
+
+# 6. os.remove(): Using the Os module we can remove a file in our system using the remove()
+# method. To remove a file we need to pass the name of the file as a parameter. 
+
+# 7. os.path.exists(): This method will check whether a file exists or not
+# by passing the name of the file as a parameter. OS module has a sub-module
+# named PATH by using which we can perform many more functions. 
+# Let's confirm it with an example...
+
+result = os.path.exists("Dinosaur.txt") #giving the name of the file as a parameter. 
+print(result) # This works..
+
+# * 8. os.path.getsize(): In this method, python will give us the size of the file in bytes. 
+# To use this method we need to pass the name of the file as a parameter.
+
+# sample..
+
+size = os.path.getsize("Dinosaur.txt") 
+print("Size of the file is", size," bytes.")
+
+# All Done with the Basics...
+
+# Now let's get into deep inside the computer memory space... Starting the * Advance! *.
+# Let's get started...
+
+# os.environ in Python is a mapping object that represents the user’s environmental variables.
+# It returns a dictionary having user’s environmental variable as key and their values as value.
+
+# os.environ behaves like a python dictionary, so all the common dictionary operations
+# like get and set can be performed. We can also modify os.environ but any changes will be
+# effective only for the current process where it was assigned and it will not 
+# change the value permanently.
+
+import pprint 
+  
+# Get the list of user's 
+# environment variables 
+env_var = os.environ 
+  
+# Print the list of user's 
+# environment variables 
+print("User's Environment variable:") 
+pprint.pprint(dict(env_var), width = 1) 
+
+# This is important sample for this function.. 
+# Accessing a particular environment variable.
+  
+# Get the value of 
+# 'JAVA_HOME' environment variable 
+# using get operation of dictionary 
+java_home = os.environ.get('JAVA_HOME') 
+  
+# Print the value of 
+# 'JAVA_HOME' environment variable 
+print("JAVA_HOME:", java_home) 
+
+# How to modify it..
+os.environ['JAVA_HOME'] = '/home / ihritik / jdk-10.0.1'
+
+# Adding a new environment variable
+# sample..
+# Add a new environment variable  
+os.environ['GeeksForGeeks'] = 'www.geeksforgeeks.org'
+  
+# Get the value of 
+# Added environment variable  
+print("GeeksForGeeks:", os.environ['GeeksForGeeks']) 
+
+# os.chdir() method in Python used to change the current working directory to specified 
+# path. It takes only a single argument as new directory path.
+# In this function it has the current directory location name and then it changes it..
+
+# os.getcwd() is used..
+# To know the current working directory of the file, getcwd() method can be used.
+# After changing the path, one can verify the path of current working directory using
+# this method. 
+cwd = os.getcwd()
+ 
+# print the current directory
+print("Current working directory is:", cwd)
+
+# os.getenv() method in Python returns the value of the environment variable key if it exists
+# otherwise returns the default value.
+
+# Get the value of 'JAVA_HOME' 
+# environment variable 
+key = 'JAVA_HOME'
+value = os.getenv(key) 
+  
+# Print the value of 'JAVA_HOME' 
+# environment variable 
+print("Value of 'JAVA_HOME' environment variable :", value) 
+
+# On progress, not done yet !. 
