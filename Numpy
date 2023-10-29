@@ -1,0 +1,102 @@
+# *IMPORTANT -> Before reading this file u must know all the basics & Advance of Python Programming Language.
+
+
+# In this lecture we will study about the numpy functions..
+
+#          * Array
+# 1. * We can use the @ symbol for the matrix multiplication in numpy..
+import numpy as np
+
+nxm = np.array([[23,45,21],
+                [34,23,65],
+                [56,42,1]])
+mxn = np.array([1,2,3])
+print(nxm @ mxn) # Output [176, 275, 143] it works..
+print()
+# Now let's work on the huge amount of data by reteriving from the internet...
+# 2. import urllib.request
+
+# urllib.request.urlretrieve('https://hub.jovian.ml/wp-content/uploads/2020/08/climate.csv',
+#                            'climate.txt') # Sorry but he url is not working so nothing..
+
+# 3. Numpy also supports the compersion operations too with the matrices.. -> ==,!=,> and other
+ 
+# 4. We can get the count of the matching elements in the 2 matrices by -> (arr1==arr2).sum()
+
+# 5. We can slice the matrix too..
+p = np.array([
+    [[23,45,21,4],
+    [34,23,65,4]],
+    
+    [[56,42,1,4],
+     [9,6,5,4]],
+    
+    [[90,80,64,2],
+     [80,70,6,42]]])
+
+print(p[1]) #[[56,42,1,4],[9,6,5,4]]
+print(p[1,1]) # [9,6,5,4]
+print(p[1,1,2]) # 5
+print()
+
+# 6. * We can create a identity matrix by just writing -> np.eye(3) -> ([[1,0,0],[0,1,0],[0,0,1]])
+
+# 7. We can create a matrix with a fixed values -> np.full([2,3], 40)
+print(np.full([2,3],40)) # ouput -> [[40 40 40],[40 40 40]]
+
+# 8.
+# ptp() -> Range of values (maximum - minimum) along an axis.
+x = np.array([[4, 9, 2, 10], # Range of values (maximum - minimum) along an axis. 
+              [6, 9, 7, 12]]) # Range of values (maximum - minimum) along an axis.
+
+print(np.ptp(x, axis=1)) # Output -> [8,6] [ 10 (max) - 2(min) -> 8, 12(max) - 6(min) -> 6].
+
+# 9. np.diag -> Extract a diagonal or construct a diagonal array.
+
+# 10. copyto -> Copies values from one array to another, broadcasting as necessary.
+
+# 11. unique -> Finds the unique element in the array.
+
+# 12. flip -> Reverse the order of elements in an array along the given axis.
+
+
+
+#           * String
+# 13. add(x1, x2) ->  Returns element-wise string concatenation for two arrays of str or unicode.
+# multiply(a, i) -> Returns (a * i), that is string multiple concatenation, element-wise.
+
+# 14. char.swapeCase -> Converts the lower into Upper and Upper into Lower (Case).
+
+# 15. char.title -> Title case words start with uppercase characters, all remaining cased characters are lowercase.
+# ex. -> today is good Weather -> Today Is Good Weather.
+
+# 16. char.rfind -> finds if any substring entered exists in the string or not.
+
+# 17. strip() -> In python we can use for removing the (space, commas and new line characters).
+
+
+
+#           * Datetime support functions
+# datetime_data -> Get information about the step size of a date or time type.
+
+# busdaycalendar([weekmask, holidays]) -> A business day calendar object that efficiently stores information defining valid days for the busday family of functions.
+
+# is_busday(dates[, weekmask, holidays, ...]) -> Calculates which of the given dates are valid days, and which are not.
+
+# busday_count(begindates, enddates[, ...]) -> Counts the number of valid days between begindates and enddates, not including the day of enddates.
+
+
+
+#           * Mathematical Functions..
+"""
+# round()-> Evenly round to the given number of decimals.
+
+# around() -> Round an array to the given number of decimals.
+
+# rint() -> Round elements of the array to the nearest integer.
+
+lcm() -> Returns the lowest common multiple of |x1| and |x2|
+
+gcd() -> Returns the greatest common divisor of |x1| and |x2|
+
+"""
