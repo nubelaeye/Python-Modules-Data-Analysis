@@ -9,7 +9,7 @@
 #          * Array
 # 1. * We can use the @ symbol for the matrix multiplication in numpy..
 import numpy as np
-
+ 
 nxm = np.array([[23,45,21],
                 [34,23,65],
                 [56,42,1]])
