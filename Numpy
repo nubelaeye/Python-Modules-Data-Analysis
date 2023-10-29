@@ -1,5 +1,8 @@
 # *IMPORTANT -> Before reading this file u must know all the basics & Advance of Python Programming Language.
 
+# Numpy is a general-purpose array-processing package. It provides a high-performance
+# multidimensional array object, and tools for working with these arrays. It is the 
+# fundamental package for scientific computing with Python.
 
 # In this lecture we will study about the numpy functions..
 
