@@ -230,4 +230,91 @@ value = os.getenv(key)
 # environment variable 
 print("Value of 'JAVA_HOME' environment variable :", value) 
 
-# On progress, not done yet !. 
+# os.get_exec_path() method in Python is used to get the list of directories that will
+# be searched for a named executable while launching a process.
+
+exec_path = os.get_exec_path() 
+  
+# Print the list 
+print("Following paths will be searched for a named executable:") 
+print(exec_path) 
+
+# os.geteuid() method in Python is used to get the current process’s effective user id.
+
+euid = os.getpid() 
+print("Effective user ID of the current process:", euid) 
+
+# os.access() method uses the real uid/gid to test for access to path. Most operations
+# uses the effective uid/gid, therefore, this routine can be used in a suid/sgid 
+# environment to test if the invoking user has the specified access to path. 
+
+# Following values can be passed as the mode parameter of access() to test the following:
+
+# "" os.F_OK: Tests existence of the path.
+# os.R_OK: Tests readability of the path.
+# os.W_OK: Tests writability of the path.
+# os.X_OK: Checks if path can be executed. ""
+
+#   Returns: True if access is allowed, else returns False.
+
+# Assuming only read operation is allowed on file
+# Checking access with os.F_OK
+path1 = os.access("gfg.txt", os.F_OK)
+print("Exists the path:", path1)
+ 
+# Checking access with os.R_OK
+path2 = os.access("gfg.txt", os.R_OK)
+print("Access to read the file:", path2)
+ 
+# Checking access with os.W_OK
+path3 = os.access("gfg.txt", os.W_OK)
+print("Access to write the file:", path3)
+ 
+# Checking access with os.X_OK
+path4 = os.access("gfg.txt", os.X_OK)
+print("Check if path can be executed:", path4)
+
+# os.chroot() method in Python is used to change the root directory of the current 
+# process to path.
+# I am not using this function because I don't want to change my current root directory.
+
+# os.link() method in Python is used to create a hard link. This method creates a hard
+# link pointing to the source named destination. 
+
+# src = '/home/ihritik/file.txt'
+ 
+# # Destination file path
+# dst = '/home/ihritik/Desktop/file(link).txt'
+# os.link(src, dst)
+ 
+# print("Hard link created successfully")
+
+#               Almost Most Common Functions Here....
+
+# os.listdir() method in python is used to get the list of all files and directories in
+# the specified directory. If we don’t specify any directory, then list of files and 
+# directories in the current working directory will be returned.
+
+path = os.getcwd() 
+  
+# Get the list of all files and directories 
+# in current working directory 
+dir_list = os.listdir(path) 
+  
+  
+print("Files and directories in '", path, "' :")  
+# print the list 
+print(dir_list) 
+
+# os.replace() method in Python is used to rename the file or directory. If destination
+# is a directory, OSError will be raised. If the destination exists and is a file, 
+# it will be replaced without error if the action performing user has permission. 
+# This method may fail if the source and destination are on different filesystems.
+file = "Dinosaur.txt"
+ 
+# File location which to rename
+location = "Dinosaur.txt"
+# Path
+path = os.replace(file, location)
+# renamed the file f.txt to d.txt
+print("File %s is renamed successfully" % file)
