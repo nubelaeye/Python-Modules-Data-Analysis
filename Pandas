@@ -1,0 +1,200 @@
+# In this lecture we will study about the Pandas Module/Library...
+# Some Funtions -> pd.read.csv, info(), describe(), columns(), shape(), type(), at(), loc()
+# We can use the head(_) and tail(_) for starting and ending data -> want's a argument.
+# u need to pass in the number of the data you want from the head and the tail..
+# If the data inserted in the infromation is passed as zero then it shows the value NaN(0).
+# If you want some of valid index in the data then we can checkout the first_valid_index().
+# If you want some random data then we can use sample(_) with argument of the numbers of data
+# we want. 
+# functions -> copy(), sum() -> it doesn't allow the NaN valeus. The NaN means Not a Number.
+# Querying And Sorting the data. example -> data which are greater than 1000.
+# drop() -> is used for dropping the data modification that we have done.
+# sort() -> in ascending or descending order whatever u want in..
+# mean() -> Average on per day.
+# to_csv()
+# Date & Time 
+# date(_), pd.DatetimeIndex(_).year, pd.DatetimeIndex(_).month, pd.DatetimeIndex(_).day,
+# pd.DatetimeIndex(_).weekday. _ -> This is for ((data's name).date)
+# groupby(), cumsum()
+# And a large things about merging..
+
+# In this lecture we will study about the Pandas Module/Library...
+# Table of Contents:-
+#       Introduction
+#       Creating Objects
+#       Viewing Data
+#       Selection
+#       Manipulating Data
+#       Grouping Data
+#       Merging, Joining and Concatenating
+#       Working with Date and Time
+#       Working With Text Data
+#       Working with CSV and Excel files
+#       Operations
+#       Visualization
+#       Applications and Projects
+#       Miscellaneous
+
+# Ok then let's get started...
+
+import pandas as pd
+import numpy as np
+
+# Introduction...
+# Q. What is Pandas ? 
+#   Pandas is an open-source library that is built on top of NumPy library. It is a Python 
+# package that offers various data structures and operations for manipulating numerical 
+# data and time series. It is mainly popular for importing and analyzing data much easier.
+# Pandas is fast and it has high-performance & productivity for users.
+
+# Creating Objects...
+# Pandas DataFrame is two-dimensional size-mutable, potentially heterogeneous tabular data
+# structure with labeled axes (rows and columns). A Data frame is a two-dimensional data 
+# structure, i.e., data is aligned in a tabular fashion in rows and columns. Pandas DataFrame
+# consists of three principal components, the data, rows, and columns.
+#   1.Creating a Pandas DataFrame -
+
+lst = ['Geeks', 'For', 'Geeks', 'is', 
+            'portal', 'for', 'Geeks']
+# Calling DataFrame constructor on list
+df = pd.DataFrame(lst)
+# print(df)
+
+#   2.Dealing with Rows and Columns -
+data = {'Name':['Jai', 'Princi', 'Gaurav', 'Anuj'],
+        'Age':[27, 24, 22, 32],
+        'Address':['Delhi', 'Kanpur', 'Allahabad', 'Kannauj'],
+        'Qualification':[np.nan, 'MA', np.nan, 'Phd']}
+ 
+#   3. Convert the dictionary into DataFrame 
+df = pd.DataFrame(data)
+ 
+# select two columns
+# print(df[['Name', 'Qualification']])
+
+# Pandas provide a unique method to retrieve rows from a Data frame. DataFrame.loc[] method
+# is used to retrieve rows from Pandas DataFrame. Rows can also be selected by passing 
+# integer location to an iloc[] function.
+
+#   4. Working with Missing Data...
+# Checking for missing values using isnull() and notnull() :
+# In order to check missing values in Pandas DataFrame, we use a function isnull() and 
+# notnull(). Both function help in checking whether a value is NaN or not. These function
+# can also be used in Pandas Series in order to find null values in a series.
+
+# print(df.isnull())
+
+# Filling missing values using fillna(), replace() and interpolate() :
+# print(df.fillna(5))
+
+# Dropping missing values using dropna() :
+# In order to drop a null values from a dataframe, we used dropna() function this fuction 
+# drop Rows/Columns of datasets with Null values in different ways.
+
+# print(df)
+# print(df.dropna())
+
+# DataFrame Methods:
+"""
+index() -> 	Method returns index (row labels) of the DataFrame
+insert() -> Method inserts a column into a DataFrame
+Arthematic Operagtions on dataFrame is allowed to -> add(), subs(), mul(), div() 
+unique() -> Method extracts the unique values in the dataframe
+nunique() -> Method returns count of the unique values in the dataframe
+value_counts() -> Method counts the number of times each unique value occurs within the Series
+between() -> Method extracts rows where a column value falls in between a predefined range
+isin() -> Method extracts rows from a DataFrame where a column value exists in a predefined collection
+sort_values() -> Set1, Set2	Method sorts a data frame in Ascending or Descending order of passed Column
+sort_index()	Method sorts the values in a DataFrame based on their index positions or labels instead of their values but sometimes a data frame is made out of two or more data frames and hence later index can be changed using this method
+rename()	Method is called on a DataFrame to change the names of the index labels or column names
+columns()	Method is an alternative attribute to change the coloumn name
+drop()	Method is used to delete rows or columns from a DataFrame
+* sample()	Method pulls out a random sample of rows or columns from a DataFrame
+nsmallest()	Method pulls out the rows with the smallest values in a column
+nlargest()	Method pulls out the rows with the largest values in a column
+shape()	Method returns a tuple representing the dimensionality of the DataFrame
+rank()	Values in a Series can be ranked in order with this method
+query()	Method is an alternate string-based syntax for extracting a subset from a DataFrame
+copy() -> Method creates an independent copy of a pandas object
+duplicated() -> Method creates a Boolean Series and uses it to extract rows that have duplicate values
+drop_duplicates() -> Method is an alternative option to identifying duplicate rows and removing them through filtering
+set_index()	Method sets the DataFrame index (row labels) using one or more existing columns
+reset_index()	Method resets index of a Data Frame. This method sets a list of integer ranging from 0 to length of data as index
+where()	Method is used to check a Data Frame for one or more condition and return the result accordingly. 
+By default, the rows not satisfying the condition are filled with NaN value
+"""
+
+# Pandas head() method is used to return top n (5 by default) rows of a data frame or series.
+# Pandas tail() method is used to return bottom n (5 by default) rows of a data frame or series.
+
+# ** The DataFrames are also called as series..
+# Now we will see how we can create a series/DataFrame.
+# simple array
+data = [1, 2, 3, 4] # Array
+list = ['g', 'e', 'e', 'k', 's'] # List
+ 
+ser = pd.Series(data)
+print(ser)
+
+print("\nNext\n")
+
+# Accessing the elements using slicing/position.
+# creating simple array
+data = np.array(['g','e','e','k','s','f', 'o','r','g','e','e','k','s'])
+ser = pd.Series(data)
+
+print(ser[:5])
+
+print("\nNext\n")
+
+# Accessing Element Using Label (index) :
+data = np.array(['g','e','e','k','s','f', 'o','r','g','e','e','k','s'])
+ser = pd.Series(data,index=[10,11,12,13,14,15,16,17,18,19,20,21,22])
+
+# accessing a element using index element
+print(ser[16])
+
+# Accessing using the .loc[] function..
+
+# using .loc[] function
+print(ser.loc[3:6])
+print(ser.loc[3:6])
+
+# ** Pandas describe() is used to view some basic statistical details like percentile, 
+# mean, std, etc. of a data frame or a series of numeric values.
+newData = pd.Series([1,2,3,4,5,6,7,8,9,10])
+print(newData.describe())
+
+#       Dealing with Rows & columns..
+# Let's go with columns FIRST..
+# Column Selection:-
+    # In Order to select a column in Pandas DataFrame, we can either access the columns 
+    # by calling them by their columns name.
+    
+dt = {'Name':['Jai', 'Princi', 'Gaurav', 'Anuj'],
+        'Age':[27, 24, 22, 32],
+        'Address':['Delhi', 'Kanpur', 'Allahabad', 'Kannauj'],
+        'Qualification':['Msc', 'MA', 'MCA', 'Phd']}
+
+pf = pd.DataFrame(dt)
+ 
+# select two columns
+print(pf[['Name', 'Qualification']])
+
+# Adding columns:-
+    # In Order to add a column in Pandas DataFrame, we can declare a new list as a column 
+    # and add to a existing Dataframe.
+
+address = ['Delhi', 'Bangalore', 'Chennai', 'Patna']
+# Using 'Address' as the column name
+# and equating it to the list
+pf['Address'] = address
+
+print(pf)
+# Deleting Column..
+# In Order to delete a column in Pandas DataFrame, we can use the
+# drop() method. Columns is deleted by dropping columns with column names.
+
+# Indexing in Pandas :
+# Indexing in pandas means simply selecting particular rows and columns of data from 
+# a DataFrame. Indexing can also be known as Subset Selection.
