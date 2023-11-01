@@ -14,7 +14,7 @@
 # to_csv()
 # Date & Time 
 # date(_), pd.DatetimeIndex(_).year, pd.DatetimeIndex(_).month, pd.DatetimeIndex(_).day,
-# pd.DatetimeIndex(_).weekday. _ -> This is for ((data's name).date)
+# pd.DatetimeIndex(_).weekday. _ -> This is for ((data's name).date) 
 # groupby(), cumsum()
 # And a large things about merging..
 
