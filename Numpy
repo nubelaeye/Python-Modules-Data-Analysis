@@ -1,105 +1,549 @@
-# *IMPORTANT -> Before reading this file u must know all the basics & Advance of Python Programming Language.
-
-# Numpy is a general-purpose array-processing package. It provides a high-performance
-# multidimensional array object, and tools for working with these arrays. It is the 
-# fundamental package for scientific computing with Python.
-
 # In this lecture we will study about the numpy functions..
-
-#          * Array
-# 1. * We can use the @ symbol for the matrix multiplication in numpy..
 import numpy as np
+import pandas as pd
+
+# COPY AND VIEW IN NUMPY :-
+# explation -> difference between copy and view is that the copy is the new array whereas the
+# view is the view of the original array. In other words, it can be said that the copy is 
+# physically stored at another location and view has the same memory location as the 
+# original array. But while working with assignments uses the id instead of making a new copy.
+
+# * We can check that "Do both array conatins the same id" by..
+# sample..
+arr = np.array([2, 4, 6, 8, 10]) 
+nc = arr
+print(id(arr))
+print(id(nc))
+
+# View: This is also known as Shallow Copy. The view is just a view of the original array 
+# and view does not own the data. When we make changes to the view it affects the original 
+# array, and when changes are made to the original array it affects the view.
+
+# sample..
+# creating a view
+v = arr.view() 
+  
+# * both arr and v have different id 
+print("id of arr", id(arr)) 
+print("id of v", id(v)) 
+# * There id's are keep changing it's value..
+  
+# changing original array 
+# will effect view 
+arr[0] = 12
+  
+# printing array and view 
+print("original array- ", arr) 
+print("view- ", v)  
+
+# Copy: This is also known as Deep Copy. The copy is completely a new array and copy owns
+# the data. When we make changes to the copy it does not affect the original array, and 
+# when changes are made to the original array it does not affect the copy.
+
+c = arr.copy() 
+  
+# both arr and c have different id 
+print("id of arr", id(arr)) 
+print("id of c", id(c)) 
+  
+# changing original array 
+# this will not effect copy 
+arr[0] = 9
+  
+# printing array and copy 
+print("original array- ", arr) 
+print("copy- ", c) 
+
+# (Heading) -> ARRAY OWING IT'S DATA :-
+# To check whether array own it’s data in view and copy we can use the fact that every
+# NumPy array has the attribute base that returns None if the array owns the data. 
+# Else, the base attribute refers to the original object.
+
+# creating copy of array 
+c = arr.copy() 
+  
+# creating view of array 
+v = arr.view() 
+  
+# printing base attribute of copy and view 
+print(c.base) 
+print(v.base)
+
+# How to Copy NumPy array into another array? -> 3 ways: 1.np.empty_like(),np.copy(),
+#  = (assignment operator) -> arr1 = arr2.
+
+# Appending values at the end of an NumPy array -> Adding values at the end of the array is
+# a necessary task especially when the data is not fixed and is prone to change. 
+# For this task we can use numpy.append() 
+# sample...
+
+arr = np.append(arr, [7])
+print(arr)
+
+# * Appending a array at the end of another array.
+# creating an array
+arr1 = np.array([1, 2, 3])
+print('First array is : ', arr1)
  
-nxm = np.array([[23,45,21],
-                [34,23,65],
-                [56,42,1]])
-mxn = np.array([1,2,3])
-print(nxm @ mxn) # Output [176, 275, 143] it works..
-print()
-# Now let's work on the huge amount of data by reteriving from the internet...
-# 2. import urllib.request
-
-# urllib.request.urlretrieve('https://hub.jovian.ml/wp-content/uploads/2020/08/climate.csv',
-#                            'climate.txt') # Sorry but he url is not working so nothing..
-
-# 3. Numpy also supports the compersion operations too with the matrices.. -> ==,!=,> and other
+# creating another array
+arr2 = np.array([4, 5, 6])
+print('Second array is : ', arr2)
  
-# 4. We can get the count of the matching elements in the 2 matrices by -> (arr1==arr2).sum()
+# appending arr2 to arr1
+arrnew = np.append(arr1, arr2)
+print('Array after appending : ', arrnew)
 
-# 5. We can slice the matrix too..
-p = np.array([
-    [[23,45,21,4],
-    [34,23,65,4]],
-    
-    [[56,42,1,4],
-     [9,6,5,4]],
-    
-    [[90,80,64,2],
-     [80,70,6,42]]])
+# Swapping of array...
 
-print(p[1]) #[[56,42,1,4],[9,6,5,4]]
-print(p[1,1]) # [9,6,5,4]
-print(p[1,1,2]) # 5
+# Creating array
+my_array = np.arange(12).reshape(4, 3)
+print("Original Array : ")
+print(my_array)
+# creating function for swap
+ 
+def Swap(arr, start_index, last_index):
+    arr[:, [start_index, last_index]] = arr[:, [last_index, start_index]]
+ 
+# passing parameter into the function
+Swap(my_array, 0, 1)
+print(" After Swapping :")
+print(my_array)
+
+# np.hstack() in python
+# numpy.hstack() function is used to stack the sequence of input arrays horizontally 
+# (i.e. column wise) to make a single array.
+
+# input array 
+in_arr1 = np.array([[ 1, 2, 3], [ -1, -2, -3]] ) 
+print ("1st Input array : \n", in_arr1)  
+  
+in_arr2 = np.array([[ 4, 5, 6], [ -4, -5, -6]] ) 
+print ("2nd Input array : \n", in_arr2)  
+  
+# Stacking the two arrays horizontally 
+out_arr = np.hstack((in_arr1, in_arr2)) 
+print ("Output stacked array :\n ", out_arr) 
+
+# same as with np.vstack() in python
+# numpy.vstack() function is used to stack the sequence of input arrays 
+# vertically to make a single array.
+
+out_arr1 = np.vstack((in_arr1, in_arr2)) 
+print ("Output stacked array :\n", out_arr1) 
+
+# Joining arrays in python..
+# NumPy provides various functions to combine arrays. In this article, we will 
+# discuss some of the major ones.
+
+# numpy.concatenate
+# numpy.stack
+# Method 1: Using numpy.concatenate()
+
+# The concatenate function in NumPy joins two or more arrays along a specified axis.
+# * 1. np.concatenate() 
+array_1 = np.array([1, 2]) 
+array_2 = np.array([3, 4]) 
+  
+array_new = np.concatenate((array_1, array_2)) 
+print(array_new)
+
+# * 2. np.stack() -> stores in vertical manner...
+
+array_1 = np.array([1, 2, 3, 4]) 
+array_2 = np.array([5, 6, 7, 8]) 
+  
+array_new = np.stack((array_1, array_2), axis=1) 
+print(array_new) 
+
+# How to compare two NumPy arrays?
+# Method 1. == .
+# Method 2. np.array_equal(arr1,arr2).
+
+# How to find union of two NumPy arrays ?
+
+# To find union of two 1-dimensional arrays we can use function numpy.union1d() of Python 
+# Numpy library. It returns unique, sorted array with values that are in either of the two 
+# input arrays.
+# it returns set the combination of both arrays. 
+arr3 = np.array([10, 20, 30, 40]) 
+print("array1 ", arr1) 
+  
+arr4 = np.array([20, 40, 60, 80]) 
+print("array2 ", arr2) 
+  
+# print union of the two arrays 
+print("Union of two arrays :", np.union1d(arr3, arr4))
+
+# The trim_zeros is used to trim(remove) elements which are deuplicate in the array in starting
+# and in the ending of the array...
+
+
+g = np.array((0, 0, 0, 0, 1, 5, 7, 0, 6, 2, 9, 0, 10, 0, 0)) 
+  
+# without trim parameter 
+# returns an array without leading and trailing zeros  
+  
+res = np.trim_zeros(g) 
+print(res) 
+
+# ** With the help of np.unique() method, we can get the unique values from an array
+# given as parameter in np.unique() method.
+
+a = [1, 2, 2, 4, 3, 6, 4, 8] 
+b = np.unique(a)
+print(b)
+
+# MATRIX MALIIPULICATION.....
+    # Operations on it...
+        # numpy.add(), mumpy.substract() , numpy.divide() &
+        # matrix multiplication:- numpyp.mul(a,b), dot(a,b), (a @ b) -> numpy swagg!
+        # dot(), sqrt(), sum(), arr.T(Transpose), ones(), eye(), idsetity(), np.eigvals()
+    # Variance is a measure of how data points differ from the mean.
+        #  With the help of Numpy matrix.var() method, we can find the variance of a matrix.
+        # by using the matrix.var() method.
+    # We can calculate the determinant of the matrix in python by np.linalg.det() function.
+ges = np.array([[50,20],[30,40]])
+print(np.linalg.det(ges))
+    # Matrix Inverse :- The inverse of a matrix is just a reciprocal of the matrix.
+# Inverses of several matrices can be computed at once  
+A = np.array([[[1., 2.], [3., 4.]],  
+              [[1, 3], [3, 5]]])  
+    
+# Calculating the inverse of the matrix  
+print(np.linalg.inv(A))
+
+# OPERATION ON NUMPY ARRAY... -> ** Awerosme **
+# There are 3 types of operations on numpy array..
+# 1.Binary operations
+# 1.Mathematical operations
+# 1.String operations
+
+# Ok then, starting by Binary Operator...
+# As you might have seen in Data Structures & Alogrithm..
+# 1.numpy.bitwise_and()..
+print(np.bitwise_and(10,11))
+
+# 2.numpy.bitwise_or()..
+print(np.bitwise_or(10,11))
+
+# 3.numpy.bitwise_xor()..
+print(np.bitwise_xor(10,11))
+
+# 4.numpy.invert() -> I think it returns the changed sign of input and add 1 it positive and substracts 1 if negative.
+print(np.invert([10,11]))
+
+# 5.numpy.left_shift()..
+print(np.left_shift(5,2))
+
+# 6.numpy.right_shift()..
+print(np.right_shift(5,2))
+
+# 7.numpy.binary_repr() -> mine Favorite(it represents the value in binary form just in 2 words).
+print(np.binary_repr(10))
+# This was the last and the best of the functions of mine..
+
+# Ok then let's move on to the 2 Operation..
+# 2. Mathematical Operations...
+# As you know it contains a lot of funciton so we will not go that deep through it, and the 
+# functions which seems to be important we will go through it.
+# functions:-  
+#     numpy.sin(), numpy.cos(), numpy.exp(), numpy.log(), numpy.reciprocal(), 
+#     numpy.cbrt()[returns the cube root of any number/array elements]. 
+
+# Important Mathematical functions..
+# 1. numpy.around() -> it used for rounding off the number..
+in_array = [.5, 1.5, 2.5, 3.5, 4.5, 10.1]
+print ("Input array : \n", in_array)
+ 
+round_off_values = np.around(in_array)
+print ("\nRounded values : \n", round_off_values)
+
+# * And if you want to just round off the number in your order you can !
+n_array = [.5538, 1.33354, .71445]
+print ("\nInput array : \n", n_array)
+ 
+round_off_values = np.around(n_array, decimals = 3)
+print ("\nRounded values : \n", round_off_values)
+
+# 2.numpy.divide() -> by this we can divide the array/array
+ar = [2, 27, 2, 21, 23]
+ar2 = [2, 3, 4, 5, 6]
+# output_array
+out = np.divide(ar, ar2)
+print ("\nOutput array : \n", out)
+
+# 3.numpy.clip() -> returns the numbers which lies in the clip for example you would understand
+# it better way and it converts the all other number with the min/max if not in range.
+a = [1,2,3,4,5,6,7,8,9,10]
+print(np.clip(a,a_min=4,a_max=6))
+
+# Moving on 3rd operation: The String Operation..
+# So in this again there are some important and some are not..
+# Common functions:-
+#     numpy.lower(), numpy.capitalize(), numpy.isnumeric(), numpy.find(), numpy.index(),
+#     numpy.isalpha(), numpy.islower(), numpy.isdecimal(), numpy.isdigit(), numpy.isspace(),
+#     numpy.istitled(), numpy.isupper(), numpy.startswith(), numpy.lower(), numpy.equal(),
+#     numpy.not_equal(), numpy.greater(), numpy.greater_equal(), numpy.less_equal(), numpy.less()
+
+# Important functions:-
+# 1.numpy.split()..
+print(np.char.split('geeks, for, geeks', sep = ','))
+
+# 2.numpy.join()..
+print(np.char.join(['-', ':'], ['geeks', 'for']))
+
+# 3. numpy.strip() -> It is used to remove all the leading and trailing spaces from a string.
+#   sample 1..
+string = '   Geeks for Geeks   '
+print(string.strip())
+
+#   sample 2..
+str = '@@@@Geeks for Geeks@@@@@'
+print(str.strip('@'))
+
+# 4. numpy.title() -> mine favorite it converts the lower into upper.
+
+print("geeks_for_geeks".title())
+
+# * 5. numpy.count() -> 2nd favorite it counts the number of occerence.
+
+arr = ['vdsdsttetteteAAAa', 'AAAAAAAaattttds', 'AAaaxxxxtt', 'AAaaXDSDdscz'] 
+
+print ("Count of 'tt'", np.char.count(arr, 'tt')) 
+
+# we can also decide what should be the start of the counter..
+print ("Count of 'tt'", np.char.count(arr, 'tt', start = 8)) 
+
+# RESHAPING NUMPY ARRAY...
+
+# 1.Reshaping numpy array simply means changing the shape of the given array, shape basically
+# tells the number of elements and dimension of array, by reshaping an array we can add or
+# remove dimensions or change number of elements in each dimension.
+
+array = np.array([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16])
+
+reshaped = np.reshape(array, (2, 8))
+print(reshaped) # This is sample for 1D to 2D
+
+# Now let's see 2D to 3D and u would understand to convert ND to MD..
+reshaped2 = array.reshape((2, 2, 4))
+print(reshaped2)
+
+# Reshaping N-D to 1-D array 
+# 1. Reshaping
+res = array.reshape((16))
+print(res)
+
+# 2.Numpy matrix.resize()..
+gfg = np.matrix('[1, 2, 4, 5, 7, 8]') 
+           
+# applying matrix.resize() method.
+geeks = gfg.resize((2, 3)) 
+print(gfg)
+
+# 3. NumPy Array Shape
+arr = np.array([2, 4, 6, 8, 10], ndmin=6)
+
+print(arr)
+print('shape of an array :', arr.shape) # Here we consider the last digit as a dimension.
+
+# 4. * Flatten a Matrix in Python using NumPy
+gfg = np.array([[6, 9, 12], [8, 5, 2], [18, 21, 24]]) 
+  
+# using array.flatten() method 
+flat_gfg = gfg.flatten(order='A') 
+print(flat_gfg) 
+
+# ARTHEMATIC OPERATIONS ON NUMPY ARRAY
+# 1.power()
+arr = np.array([5, 10, 15]) 
+ 
+print('First array is:') 
+print(arr)
+ 
+print('\nApplying power function:') 
+print(np.power(arr, 2))
+
+# 2.mod()
+arr = np.array([5, 15, 20]) 
+arr1 = np.array([2, 5, 9]) 
+ 
+print('First array:') 
+print(arr) 
+ 
+print('\nSecond array:') 
+print(arr1)
+ 
+print('\nApplying mod() function:') 
+print(np.mod(arr, arr1))
+
+# 3.remainder()
+print(np.remainder(arr, arr1))
 print()
 
-# 6. * We can create a identity matrix by just writing -> np.eye(3) -> ([[1,0,0],[0,1,0],[0,0,1]])
+# Inner() in numpy
+print(np.inner(4,5))
+print()
+# let's see how does it work for complex numebrs too!
+print(np.inner(4+3j,5+2j))
 
-# 7. We can create a matrix with a fixed values -> np.full([2,3], 40)
-print(np.full([2,3],40)) # ouput -> [[40 40 40],[40 40 40]]
+# absolute(), mean(), Absolute mean deviation()
+print(np.absolute(-7.9)) # Only Positive.
 
-# 8.
-# ptp() -> Range of values (maximum - minimum) along an axis.
-x = np.array([[4, 9, 2, 10], # Range of values (maximum - minimum) along an axis. 
-              [6, 9, 7, 12]]) # Range of values (maximum - minimum) along an axis.
+data = [75, 69, 56, 46, 47, 79, 92, 97, 89, 88,  
+        36, 96, 105, 32, 116, 101, 79, 93, 91, 112] 
 
-print(np.ptp(x, axis=1)) # Output -> [8,6] [ 10 (max) - 2(min) -> 8, 12(max) - 6(min) -> 6].
+# mean()
+print(np.mean(data))
 
-# 9. np.diag -> Extract a diagonal or construct a diagonal array.
+# Absolute mean deviation ()
+df = pd.DataFrame(data) 
+  
+# Absolute mean deviation 
+df.mad()
 
-# 10. copyto -> Copies values from one array to another, broadcasting as necessary.
+# Numpy | Linear Algebra
+A = np.array([[6, 1, 1],
+              [4, -2, 5],
+              [2, 8, 7]])
 
-# 11. unique -> Finds the unique element in the array.
+# 1. Rank of a matrix 
+print("Rank of A:", np.linalg.matrix_rank(A))
+ 
+# 2. Trace of matrix A it retrurns the main diagonal sum
+print("\nTrace of A:", np.trace(A))
+ 
+# 3. Determinant of a matrix
+print("\nDeterminant of A:", np.linalg.det(A))
+ 
+# 4. Inverse of matrix A
+print("\nInverse of A:\n", np.linalg.inv(A))
+ 
+# 5. Matrix raised to power n
+print("\nMatrix A raised to power 3:\n",
+           np.linalg.matrix_power(A, 3))
+# 6. Det() -> returns the determinant of the matrix..
+A = np.array([[6, 1, 1],
+              [4, -2, 5],
+              [2, 8, 7]])
+ 
+ 
+print(("\nDeterminant of A:"
+     , np.linalg.det(A)))
 
-# 12. flip -> Reverse the order of elements in an array along the given axis.
+# Random functions() in numpy makes better to work with numpy arrays..
+# numpy.random.shuffle() method, we can get the random positioning of different integer
+# values in the numpy array or we can say that all the values in an array will be 
+# shuffled randomly.
 
+gfg = np.arange(10) 
+# Using shuffle() method 
+np.random.shuffle(gfg) 
+  
+print(gfg)
 
+# sample 2.
 
-#           * String
-# 13. add(x1, x2) ->  Returns element-wise string concatenation for two arrays of str or unicode.
-# multiply(a, i) -> Returns (a * i), that is string multiple concatenation, element-wise.
+gfg = np.arange(16).reshape((4, 4)) 
+# Using shuffle() method 
+np.random.shuffle(gfg) 
+  
+print(gfg)
 
-# 14. char.swapeCase -> Converts the lower into Upper and Upper into Lower (Case).
+# * numpy.random.geometric() in Python
+import matplotlib.pyplot as plt 
+  
+# Using geometric() method 
+gfg = np.random.geometric(0.65, 1000) 
+  
+count, bins, ignored = plt.hist(gfg, 40, density = True) 
+plt.show()
 
-# 15. char.title -> Title case words start with uppercase characters, all remaining cased characters are lowercase.
-# ex. -> today is good Weather -> Today Is Good Weather.
+# Sorting and Searching in NumPy Array
+# Numpy provides various methods for searching different kinds of numerical values, in this
+# article, we will cover two important ones:-
+    # 1. numpy.where()
+    # 2. numpy.searchsorted()
+    
+# 1. numpy.where:() It returns the indices of elements in an input array where the 
+# given condition is satisfied.
+arr = np.array([10, 32, 30, 50, 20, 82, 91, 45]) 
+#  printing arr 
+print("arr = {}".format(arr)) 
+  
+#  looking for value 30 in arr and storing its index in i 
+i = np.where(arr == 30) 
+print(i)
 
-# 16. char.rfind -> finds if any substring entered exists in the string or not.
+# 2. * numpy.searchsorted(): The function is used to find the indices into a sorted array arr
+# such that, if elements are inserted before the indices, the order of arr would be still 
+# preserved. Here, a binary search is used to find the required insertion indices.
 
-# 17. strip() -> In python we can use for removing the (space, commas and new line characters).
+print("arr = {}".format(arr)) 
 
+# left-most 3 
+print("left-most index = {}".format(np.searchsorted(arr, 3, side="left"))) 
+  
+# right-most 3 
+print("right-most index = {}".format(np.searchsorted(arr, 3, side="right")))
 
+# How to sort a Numpy Array | Python ?
+a = np.array([12, 15, 10, 1])
+print(a.sort())
+# and same with as matrix too.
 
-#           * Datetime support functions
-# datetime_data -> Get information about the step size of a date or time type.
+# Searching..
 
-# busdaycalendar([weekmask, holidays]) -> A business day calendar object that efficiently stores information defining valid days for the busday family of functions.
+array = np.arange(12).reshape(3, 4)
+print("INPUT ARRAY : \n", array)
+ 
+# No axis mentioned, so works on entire array
 
-# is_busday(dates[, weekmask, holidays, ...]) -> Calculates which of the given dates are valid days, and which are not.
+print("\nMax element : ", np.argmax(array))
+ 
+# returning Indices of the max element
+# as per the indices
 
-# busday_count(begindates, enddates[, ...]) -> Counts the number of valid days between begindates and enddates, not including the day of enddates.
+print(("\nIndices of Max element : "
+      , np.argmax(array, axis=0)))
+print(("\nIndices of Max element : "
+      , np.argmax(array, axis=1)))
 
+# Counting...
+a = np.count_nonzero([[0,1,7,0,0],[3,0,0,2,19]])
+b = np.count_nonzero([[0,1,7,0,0],[3,0,0,2,19]], axis=0)
+ 
+print("Number of nonzero values is :",a)
+print("Number of nonzero values is :",b)
 
+# Numpy | Universal functions..
 
-#           * Mathematical Functions..
-"""
-# round()-> Evenly round to the given number of decimals.
+# amin, amax -> returns minimum or maximum of an array or along an axis
+# ptp -> returns range of values (maximum-minimum) of an array or along an axis
+# median ->	compute median of data along specified axis
+# mean -> compute mean of data along specified axis
+# std -> compute standard deviation of data along specified axis
+# var -> compute variance of data along specified axis
+# average -> compute average of data along specified axis
 
-# around() -> Round an array to the given number of decimals.
+# Create a image using NumPy array in Python.
+from PIL import Image
+image = Image.open('Sample.jpg')
+ 
+# summarize some details about the image
+print(image.format)
 
-# rint() -> Round elements of the array to the nearest integer.
+print(image.size)
 
-lcm() -> Returns the lowest common multiple of |x1| and |x2|
+print(image.mode)
 
-gcd() -> Returns the greatest common divisor of |x1| and |x2|
+img = Image.open('Sample.jpg')
 
-"""
+numpydata = np.asarray(img)
+ 
+# data
+print(numpydata)
+
+# Well done you are awesome if you reached till here because this is the end of this file.
+# Well I hope you would understand all the topics and have a flow on it...
+# Thanks for reading BYE!
