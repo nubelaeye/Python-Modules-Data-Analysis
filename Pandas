@@ -1,200 +1,840 @@
-# In this lecture we will study about the Pandas Module/Library...
-# Some Funtions -> pd.read.csv, info(), describe(), columns(), shape(), type(), at(), loc()
-# We can use the head(_) and tail(_) for starting and ending data -> want's a argument.
-# u need to pass in the number of the data you want from the head and the tail..
-# If the data inserted in the infromation is passed as zero then it shows the value NaN(0).
-# If you want some of valid index in the data then we can checkout the first_valid_index().
-# If you want some random data then we can use sample(_) with argument of the numbers of data
-# we want. 
-# functions -> copy(), sum() -> it doesn't allow the NaN valeus. The NaN means Not a Number.
-# Querying And Sorting the data. example -> data which are greater than 1000.
-# drop() -> is used for dropping the data modification that we have done.
-# sort() -> in ascending or descending order whatever u want in..
-# mean() -> Average on per day.
-# to_csv()
-# Date & Time 
-# date(_), pd.DatetimeIndex(_).year, pd.DatetimeIndex(_).month, pd.DatetimeIndex(_).day,
-# pd.DatetimeIndex(_).weekday. _ -> This is for ((data's name).date) 
-# groupby(), cumsum()
-# And a large things about merging..
+# Welcome back! To Pandas...
 
-# In this lecture we will study about the Pandas Module/Library...
-# Table of Contents:-
-#       Introduction
-#       Creating Objects
-#       Viewing Data
-#       Selection
-#       Manipulating Data
-#       Grouping Data
-#       Merging, Joining and Concatenating
-#       Working with Date and Time
-#       Working With Text Data
-#       Working with CSV and Excel files
-#       Operations
-#       Visualization
-#       Applications and Projects
-#       Miscellaneous
+# This Pandas Tutorial will help learning Pandas from Basics 
+# to advance data analysis operations, including all necessary functions explained in detail.
 
-# Ok then let's get started...
+# Table of Contents...
+# 1. Introduction
+# 2. Creating Objects
+# 3. Viewing Data
+# 4. Selection & slicing
+# 5. Operations
+# 6. Manipulating Data
+# 7. Grouping Data
+# 8. Merging, Joining and Concatenating
+# 9. Working with Date and Time
+#10. Working With Text Data
+#11. Working with CSV and Excel files
+#12. Visualization
 
-import pandas as pd
-import numpy as np
+# Ok then let's get started too!
+#                                   1. Introduction' *****
+# Pandas is an open-source library in Python that is made mainly for working with relational 
+# or labeled data both easily and intuitively. It provides various data structures and 
+# operations for manipulating numerical data and time series. This library is built on 
+# top of the NumPy library of Python. Pandas is fast and it has high performance & 
+# productivity for users.
 
-# Introduction...
-# Q. What is Pandas ? 
-#   Pandas is an open-source library that is built on top of NumPy library. It is a Python 
-# package that offers various data structures and operations for manipulating numerical 
-# data and time series. It is mainly popular for importing and analyzing data much easier.
-# Pandas is fast and it has high-performance & productivity for users.
+# Why Use Pandas?
 
-# Creating Objects...
-# Pandas DataFrame is two-dimensional size-mutable, potentially heterogeneous tabular data
+# Fast and efficient for manipulating and analyzing data.
+# Data from different file objects can be easily loaded.
+# Flexible reshaping and pivoting of data sets
+# Provides time-series functionality.
+
+# What can you do using Pandas?
+
+# Data set cleaning, merging, and joining.
+# Easy handling of missing data (represented as NaN) in floating point as well as 
+# non-floating point data.
+# Columns can be inserted and deleted from DataFrame and higher dimensional objects.
+# Powerful group by functionality for performing split-apply-combine operations on data sets.
+# Data Visulaization.
+
+# Pandas Data Structures
+# Pandas generally provide two data structures for manipulating data, They are: 
+
+# 1. Series
+# 2. DataFrame
+
+# Series..
+# Pandas Series is a one-dimensional labeled array capable of holding data of any type 
+# (integer, string, float, python objects, etc.). The axis labels are collectively called index.
+# Pandas Series is nothing but a column in an Excel sheet. Labels need not be unique but must
+# be a hashable type. The object supports both integer and label-based indexing and provides 
+# a host of methods for performing operations involving the index.
+
+# Creating a Series...
+import pandas as pd  
+import numpy as np 
+  
+# Creating empty series  
+ser = pd.Series()  
+print("Pandas Series: ", ser)  
+  
+# simple array  
+data = np.array(['g', 'e', 'e', 'k', 's'])  
+    
+ser = pd.Series(data)  
+print("Pandas Series:\n", ser)
+
+# * DataFrame..
+# Pandas DataFrame is a two-dimensional size-mutable, potentially heterogeneous tabular data
 # structure with labeled axes (rows and columns). A Data frame is a two-dimensional data 
 # structure, i.e., data is aligned in a tabular fashion in rows and columns. Pandas DataFrame
 # consists of three principal components, the data, rows, and columns.
-#   1.Creating a Pandas DataFrame -
 
-lst = ['Geeks', 'For', 'Geeks', 'is', 
-            'portal', 'for', 'Geeks']
-# Calling DataFrame constructor on list
-df = pd.DataFrame(lst)
-# print(df)
+# Creating a DataFrame..
 
-#   2.Dealing with Rows and Columns -
-data = {'Name':['Jai', 'Princi', 'Gaurav', 'Anuj'],
-        'Age':[27, 24, 22, 32],
-        'Address':['Delhi', 'Kanpur', 'Allahabad', 'Kannauj'],
-        'Qualification':[np.nan, 'MA', np.nan, 'Phd']}
+import pandas as pd  
+    
+# Calling DataFrame constructor  
+df = pd.DataFrame()  
+print(df) 
+  
+# list of strings  
+lst = ['Geeks', 'For', 'Geeks', 'is', 'portal', 'for', 'Geeks']  
+    
+# Calling DataFrame constructor on list  
+df = pd.DataFrame(lst)  
+print(df)
+
+#                                   2. Creating Objects' *****
+
+#       1. Creating Object with Dictonary...
+
+# initialise data of lists.
+data = {'Name':['Tom', 'nick', 'krish', 'jack'], 'Age':[20, 21, 19, 18]}
  
-#   3. Convert the dictionary into DataFrame 
+# Create DataFrame
 df = pd.DataFrame(data)
  
-# select two columns
-# print(df[['Name', 'Qualification']])
+# Print the output.
+print(df)
 
-# Pandas provide a unique method to retrieve rows from a Data frame. DataFrame.loc[] method
-# is used to retrieve rows from Pandas DataFrame. Rows can also be selected by passing 
-# integer location to an iloc[] function.
+#       2. Accessing element of Series..
 
-#   4. Working with Missing Data...
-# Checking for missing values using isnull() and notnull() :
-# In order to check missing values in Pandas DataFrame, we use a function isnull() and 
-# notnull(). Both function help in checking whether a value is NaN or not. These function
-# can also be used in Pandas Series in order to find null values in a series.
+# There are two ways through which we can access element of series, they are :
 
-# print(df.isnull())
+# 1. Accessing Element from Series with Position
+# 2. Accessing Element Using Label (index)
 
-# Filling missing values using fillna(), replace() and interpolate() :
-# print(df.fillna(5))
-
-# Dropping missing values using dropna() :
-# In order to drop a null values from a dataframe, we used dropna() function this fuction 
-# drop Rows/Columns of datasets with Null values in different ways.
-
-# print(df)
-# print(df.dropna())
-
-# DataFrame Methods:
-"""
-index() -> 	Method returns index (row labels) of the DataFrame
-insert() -> Method inserts a column into a DataFrame
-Arthematic Operagtions on dataFrame is allowed to -> add(), subs(), mul(), div() 
-unique() -> Method extracts the unique values in the dataframe
-nunique() -> Method returns count of the unique values in the dataframe
-value_counts() -> Method counts the number of times each unique value occurs within the Series
-between() -> Method extracts rows where a column value falls in between a predefined range
-isin() -> Method extracts rows from a DataFrame where a column value exists in a predefined collection
-sort_values() -> Set1, Set2	Method sorts a data frame in Ascending or Descending order of passed Column
-sort_index()	Method sorts the values in a DataFrame based on their index positions or labels instead of their values but sometimes a data frame is made out of two or more data frames and hence later index can be changed using this method
-rename()	Method is called on a DataFrame to change the names of the index labels or column names
-columns()	Method is an alternative attribute to change the coloumn name
-drop()	Method is used to delete rows or columns from a DataFrame
-* sample()	Method pulls out a random sample of rows or columns from a DataFrame
-nsmallest()	Method pulls out the rows with the smallest values in a column
-nlargest()	Method pulls out the rows with the largest values in a column
-shape()	Method returns a tuple representing the dimensionality of the DataFrame
-rank()	Values in a Series can be ranked in order with this method
-query()	Method is an alternate string-based syntax for extracting a subset from a DataFrame
-copy() -> Method creates an independent copy of a pandas object
-duplicated() -> Method creates a Boolean Series and uses it to extract rows that have duplicate values
-drop_duplicates() -> Method is an alternative option to identifying duplicate rows and removing them through filtering
-set_index()	Method sets the DataFrame index (row labels) using one or more existing columns
-reset_index()	Method resets index of a Data Frame. This method sets a list of integer ranging from 0 to length of data as index
-where()	Method is used to check a Data Frame for one or more condition and return the result accordingly. 
-By default, the rows not satisfying the condition are filled with NaN value
-"""
-
-# Pandas head() method is used to return top n (5 by default) rows of a data frame or series.
-# Pandas tail() method is used to return bottom n (5 by default) rows of a data frame or series.
-
-# ** The DataFrames are also called as series..
-# Now we will see how we can create a series/DataFrame.
-# simple array
-data = [1, 2, 3, 4] # Array
-list = ['g', 'e', 'e', 'k', 's'] # List
- 
-ser = pd.Series(data)
-print(ser)
-
-print("\nNext\n")
-
-# Accessing the elements using slicing/position.
-# creating simple array
+# Accessing Element from Series with Position :- 
+#       In order to access the series element refers to the index number.
+# ṣample..
 data = np.array(['g','e','e','k','s','f', 'o','r','g','e','e','k','s'])
 ser = pd.Series(data)
-
+  
+  
+#retrieve the first element
 print(ser[:5])
 
-print("\nNext\n")
-
 # Accessing Element Using Label (index) :
+# In order to access an element from series, we have to set values by index label. A Series
+# is like a fixed-size dictionary in that you can get and set values by index label.
+# sample..
 data = np.array(['g','e','e','k','s','f', 'o','r','g','e','e','k','s'])
 ser = pd.Series(data,index=[10,11,12,13,14,15,16,17,18,19,20,21,22])
-
+  
+  
 # accessing a element using index element
 print(ser[16])
 
-# Accessing using the .loc[] function..
+#       3. Indexing and Selecting Data in Series..
 
-# using .loc[] function
-print(ser.loc[3:6])
-print(ser.loc[3:6])
+data = ser.head(10)
+print(data)
 
-# ** Pandas describe() is used to view some basic statistical details like percentile, 
-# mean, std, etc. of a data frame or a series of numeric values.
-newData = pd.Series([1,2,3,4,5,6,7,8,9,10])
-print(newData.describe())
+# Using loc[] & iloc[] function we can retrieve the data.
+print("This is loc function",data.loc[3:5]) 
 
-#       Dealing with Rows & columns..
-# Let's go with columns FIRST..
-# Column Selection:-
-    # In Order to select a column in Pandas DataFrame, we can either access the columns 
-    # by calling them by their columns name.
-    
-dt = {'Name':['Jai', 'Princi', 'Gaurav', 'Anuj'],
-        'Age':[27, 24, 22, 32],
-        'Address':['Delhi', 'Kanpur', 'Allahabad', 'Kannauj'],
-        'Qualification':['Msc', 'MA', 'MCA', 'Phd']}
+print("This is iloc function: ",data.iloc[3:7])
 
-pf = pd.DataFrame(dt)
+#       4. Binary Operations..
+
+# Binary operation methods on series:
+
+# add() - Method is used to add series or list like objects with same length to the caller series
+# sub() - Method is used to subtract series or list like objects with same length from the caller series
+# mul() - Method is used to multiply series or list like objects with same length with the caller series
+# div() - Method is used to divide series or list like objects with same length by the caller series
+# sum() - Returns the sum of the values for the requested axis
+# prod() - Returns the product of the values for the requested axis
+# mean() - Returns the mean of the values for the requested axis
+# pow() - Method is used to put each element of passed series as exponential power of caller series and returned the results
+# abs() - Method is used to get the absolute numeric value of each element in Series/DataFrame
+# cov() - Method is used to find covariance of two series
+
+#       * 5 Pandas Series Methods...
+
+# Series() - A pandas Series can be created with the Series() constructor method. This constructor method accepts a variety of inputs
+# combine_first() - Method is used to combine two series into one
+# * count() - Returns number of non-NA/null observations in the Series
+# size() - Returns the number of elements in the underlying data
+# name() - Method allows to give a name to a Series object, i.e. to the column
+# * is_unique() - Method returns boolean if values in the object are unique
+# * idxmax() - Method to extract the index positions of the highest values in a Series
+# * idxmin() - Method to extract the index positions of the lowest values in a Series
+# * sort_values() - Method is called on a Series to sort the values in ascending or descending order
+# sort_index() - Method is called on a pandas Series to sort it by the index instead of its values
+# * [common] head() - Method is used to return a specified number of rows from the beginning of a Series. The method returns a brand new Series
+# * [common] tail() - Method is used to return a specified number of rows from the end of a Series. The method returns a brand new Series
+# [Read once] - le() - Used to compare every element of Caller series with passed series.It returns True for every element which is Less than or Equal to the element in passed series
+# [Read once] - ne() - Used to compare every element of Caller series with passed series. It returns True for every element which is Not Equal to the element in passed series
+# [Read once] - ge() - Used to compare every element of Caller series with passed series. It returns True for every element which is Greater than or Equal to the element in passed series
+# [Read once] - eq() - Used to compare every element of Caller series with passed series. It returns True for every element which is Equal to the element in passed series
+# [Read once] - gt() - Used to compare two series and return Boolean value for every respective element
+# [Read once] - lt() - Used to compare two series and return Boolean value for every respective element
+# clip() - Used to clip value below and above to passed Least and Max value
+# clip_lower() - Used to clip values below a passed least value
+# clip_upper() - Used to clip values above a passed maximum value
+# [common] astype() - Method is used to change data type of a series
+# * tolist() - Method is used to convert a series to list
+# * get() - Method is called on a Series to extract values from a Series. This is alternative syntax to the traditional bracket syntax
+# unique() - Pandas unique() is used to see the unique values in a particular column
+# * nunique() - Pandas nunique() is used to get a count of unique values
+# * value_counts() - Method to count the number of the times each unique value occurs in a Series
+# factorize() - Method helps to get the numeric representation of an array by identifying distinct values
+# map() - Method to tie together the values from one object to another
+# * between() - Pandas between() method is used on series to check which values lie between first and second argument
+# * apply() - Method is to apply a particular function passed in is applied to all the elements of the series
+
+# For creating a series of only one value in it we can use:-
+ser = pd.Series(10, index=[0, 1, 2, 3, 4, 5])
  
-# select two columns
-print(pf[['Name', 'Qualification']])
+print(ser)
 
-# Adding columns:-
-    # In Order to add a column in Pandas DataFrame, we can declare a new list as a column 
-    # and add to a existing Dataframe.
+# Creating a series with a given range:-
 
+ser = pd.Series(range(10))
+print(ser)
+
+#                                3. Viewing Data..
+
+# Pandas head() method is used to return top n (5 by default) rows of a data frame or series.
+data_top = data.head(4) 
+# display 
+print("Displaying head of the data with 3 elements on the top",data_top)
+
+# Similarly with the tails function():-
+# Pandas tail() method is used to return bottom n (5 by default) rows of a data frame or series.
+data_bottom = data.tail() 
+  
+# display 
+print(data_bottom)
+
+# *Pandas DataFrame describe()
+# Pandas describe() is used to view some basic statistical details like percentile, mean,
+# std, etc. of a data frame or a series of numeric values.
+
+print(data.describe())
+
+#                              4. Selction & Slicing..
+
+#   1.Dealing with Rows and Columns in Pandas DataFrame
+
+data = {'Name':['Jay','Anuj','Raj','Ewww'],
+        'Age':[21,10,8,50],
+        'Address':['Delhi', 'Kanpur', 'Allahabad', 'Kannauj'],
+        'Qualification':['Msc', 'MA', 'MCA', 'PhD']}
+
+df = pd.DataFrame(data)
+print(df[['Name','Age']]) # Remember it's double square brackets..
+
+#   2. We can change the column..
 address = ['Delhi', 'Bangalore', 'Chennai', 'Patna']
-# Using 'Address' as the column name
-# and equating it to the list
-pf['Address'] = address
+df['Address'] = address
+print(df)
 
-print(pf)
-# Deleting Column..
-# In Order to delete a column in Pandas DataFrame, we can use the
-# drop() method. Columns is deleted by dropping columns with column names.
+# 3. To delete a column in Pandas DataFrame, we can use the drop() method.
+df.drop(["Age"], axis = 1 , inplace = True)
+print(df)
 
-# Indexing in Pandas :
-# Indexing in pandas means simply selecting particular rows and columns of data from 
-# a DataFrame. Indexing can also be known as Subset Selection.
+# In Order to add a Row in Pandas DataFrame, we can concat the old dataframe with new one.
+new_row = pd.DataFrame({'Name':'Geeks', 'Team':'Boston', 'Number':3,
+                        'Position':'PG', 'Age':33, 'Height':'6-2',
+                        'Weight':189, 'College':'MIT', 'Salary':99999},
+                                                            index =[0])
+# simply concatenate both dataframes
+df = pd.concat([new_row, df]).reset_index(drop = True)
+print(df.head(5))
+
+#    4.Some * important Factors..
+# 1. How to get column names in Pandas dataframe -> data.keys(), data.columns.
+# 2. How to rename columns in Pandas DataFrame -> rename(), data.columns = ['new columns'],
+#   rankings_pd.set_axis(['A', 'B', 'C'], axis='columns', inplace=True).
+# 3. *** How to drop one or multiple columns in Pandas Dataframe ->
+data = {
+    'A': ['A1', 'A2', 'A3', 'A4', 'A5'],
+    'B': ['B1', 'B2', 'B3', 'B5', 'B5'],
+    'C': ['C1', 'C2', 'C3', 'C4', 'C5'],
+    'D': ['D1', 'D2', 'D3', 'D4', 'D5'],
+    'E': ['E1', 'E2', 'E3', 'E4', 'E5']}
+ 
+# Convert the dictionary into DataFrame
+df = pd.DataFrame(data)
+ 
+# Remove column name 'A'
+# Method 1.
+df.drop(df.columns[[0]], axis=1, inplace=True)
+# Method 2.
+df.pop('C') # Here is the best... 
+print(df)
+
+# 4. How to get unique values from a column in Pandas DataFrame
+print(df.B.unique()) # and DONE!
+
+# 5. How to lowercase strings in a column in Pandas dataframe
+df = pd.DataFrame({'A': ['John', 'bODAY', 'MinA', 'Peter', 'nicky'],
+                  'B': ['masters', 'graduate', 'graduate', 
+                                   'Masters', 'Graduate'],
+                  'C': [27, 23, 21, 23, 24]})
+  
+df['A'] = df['A'].str.lower() # Same as with the Upper case df['A'] = df['A'].str.upper()
+print(df)
+
+# 6. * Capitalize first letter of a column in Pandas dataframe.
+df['A'] = df['A'].str.capitalize()# How simp is that!
+print(df)
+
+# 7. How to get n-smallest values from a particular column in Pandas DataFrame.
+# Just use the function -> df.nsmallest(n, ['column name'])
+# and as you might know now for the nlargest valeus.. -> df.nlargest(n, ['column name']).
+
+
+# *** The major difference between loc[] and iloc[] is :
+# loc[] allows you to access data by labels.
+# iloc[] allows you to access data by integer location.
+
+
+#       5. Indexing and Selecting Data with Pandas..
+
+# Pandas support four types of Multi-axes indexing they are:
+
+# Dataframe.[ ] ; This function also known as indexing operator
+# Dataframe.loc[ ] : This function is used for labels.
+# Dataframe.iloc[ ] : This function is used for positions or integer based
+# Dataframe.ix[] : This function is used for both label and integer based
+
+# 1. Selecting a single column
+first = data["A"] 
+
+print(first)
+
+#       6. String slicing in Pandas Series..
+
+# making data frame  
+data = pd.read_csv("https://media.geeksforgeeks.org/wp-content/uploads/nba.csv")  
+    
+# removing null values to avoid errors  
+data.dropna(inplace = True)  
+  
+# start stop and step variables 
+start, stop, step = 0, -2, 2
+  
+# converting to string data type 
+data["Salary"]= data["Salary"].astype(str) 
+  
+# slicing till 2nd last element 
+data["Salary (int)"]= data["Salary"].str.slice(start, stop, step) 
+  
+# display 
+print(data.head(10)) # All the updation is happening in the Salary(int). After sometime u 
+# ṃight understand it well by solving some slicing by hand on your notebook.
+
+#                   5. Operations
+
+# 1. Pandas.apply():-
+# Pandas.apply allow the users to pass a function and apply it on every single value of the Pandas series
+# It comes as a huge improvement for the pandas library as this function helps to segregate 
+# data according to the conditions required due to which it is efficiently used in data 
+# science and machine learning.
+
+# 2. Dataframe.aggregate() can used to get the sum, max, min of the data passed in.
+# 3. Dataframe.mad() returns the mean absolute deviation of the values for the *[requested axis].
+df = pd.DataFrame({"A":[12, 4, 5, 44, 1], 
+                   "B":[5, 2, 54, 3, 2],  
+                   "C":[20, 16, 7, 3, 8], 
+                   "D":[14, 3, 17, 2, 6]}) 
+
+print(df.mad(axis = 0) )
+
+# 4. Pandas dataframe.sem() function return unbiased standard error of the mean over 
+# requested axis. The standard error (SE) of a statistic (usually an estimate of a parameter)
+
+# 5. Pandas Series.value_counts().
+
+sr = pd.Series(['New York', 'Chicago', 'Toronto', 'Lisbon', 'Rio', 'Chicago', 'Lisbon']) 
+  
+# Print the series 
+print(sr) 
+print(sr.value_counts)
+
+# 6. * Applying Lambda functions to Pandas Dataframe.
+
+# creating and initializing a list
+values= [['Rohan',455],['Elvish',250],['Deepak',495],
+         ['Soni',400],['Radhika',350],['Vansh',450]] 
+ 
+# creating a pandas dataframe
+df = pd.DataFrame(values,columns=['Name','Total_Marks'])
+ 
+# Applying lambda function to find 
+# percentage of 'Total_Marks' column 
+# using df.assign()
+df = df.assign(Percentage = lambda x: (x['Total_Marks'] /500 * 100))
+ 
+# 7. Applying to multiple columns..
+
+values_list = [[15, 2.5, 100], [20, 4.5, 50], [25, 5.2, 80],
+               [45, 5.8, 48], [40, 6.3, 70], [41, 6.4, 90],
+               [51, 2.3, 111]]
+ 
+# creating a pandas dataframe
+df = pd.DataFrame(values_list, columns=['Field_1', 'Field_2', 'Field_3'])
+
+df = df.assign(Product=lambda x: (x['Field_1'] * x['Field_2'] * x['Field_3']))
+ 
+#                   6. Manipulating Data...
+
+#   1. Adding new column to existing DataFrame in Pandas.
+
+data = {'Name':['Jay','Prachi','Gaurav','Anuj'],
+        'Height':[6.5,5.1,5.5,6.7],
+        'Qualification':['Msc', 'MA', 'MD','MBA']}
+
+df = pd.DataFrame(data)
+
+address = ['Banglore','Uttar Pradesh', 'Kerla', 'Andra Pradesh']
+# Note that the length of your list should match the length of the index column 
+# otherwise it will show an error. 
+df['Address'] = address
+
+print(df)
+
+# * We can use the dataframe.insert() to insert the columns in the dataframe at the specific index
+
+df.insert(2, "Age", [21, 23, 24, 21], True)
+
+print(df)
+
+# We can also add the column in the DF by using the df.assign().
+df2 = df.assign(address=['Delhi', 'Bangalore', 'Chennai', 'Patna'])
+ 
+# Observe the result
+print(df2)
+
+#   2. Delete rows/columns from DataFrame using Pandas.drop().
+
+data = pd.read_csv("https://media.geeksforgeeks.org/wp-content/uploads/nba.csv")  
+df = pd.DataFrame(data)
+
+print(df)
+
+df.drop(["Team","Name"], axis = 1 , inplace=True)
+
+print(df)
+
+#   3.Pandas DataFrame.truncate.
+
+# Pandas DataFrame.truncate() function is used to truncate a Series or DataFrame before and
+# after some index value. This is a useful shorthand for boolean indexing based on index 
+# values above or below certain thresholds.
+
+df = pd.DataFrame({'Weight':[45, 88, 56, 15, 71], 
+                   'Name':['Sam', 'Andrea', 'Alex', 'Robin', 'Kia'], 
+                   'Age':[14, 25, 55, 8, 21]}) 
+  
+# Create the index 
+index_ = pd.date_range('2010-10-09 08:45', periods = 5, freq ='H') 
+  
+# Set the index 
+df.index = index_ 
+  
+# Print the DataFrame 
+print(df) 
+
+result = df.truncate(before = '2010-10-09 09:45:00', after = '2010-10-09 11:45:00') 
+  
+# Print the result 
+print(result) 
+
+#   4.Iterating over rows and columns in Pandas DataFrame.
+# 1. Iterating over rows :-
+
+# dictionary of lists 
+dict = {'name':["aparna", "pankaj", "sudhir", "Geeku"], 
+        'degree': ["MBA", "BCA", "M.Tech", "MBA"], 
+        'score':[90, 40, 80, 98]} 
+  
+# creating a dataframe from a dictionary  
+df = pd.DataFrame(dict) 
+  
+# iterating over rows using iterrows() function  
+for i, j in df.iterrows(): 
+    print(i, j) 
+    print() 
+
+# 2. Iterating over Columns :-
+columns = list(df) 
+  
+for i in columns: 
+  
+    # printing the third element of the column 
+    print (df[i][2]) 
+    
+# 3. Sorting values in DataFrame.
+
+# Syntax: 
+
+# DataFrame.sort_values(by, axis=0, ascending=True, inplace=False, kind=’quicksort’, na_position=’last’)
+
+# data.sort_values("Salary", axis = 0, ascending = True,
+#                  inplace = True, na_position ='first')
+
+#                   7. Grouping Data..
+
+# Grouping data in daraframe in pandas in a vast topic. let's cover it with a soft hand of time..
+# Staring with first sub topic ->
+# 1. Group By
+#       Groupby is a pretty simple concept. We can create a grouping of categories and apply a 
+# function to the categories. It’s a simple concept but it’s an extremely valuable technique
+# that’s widely used in data science.
+
+# There are three types of group by methods to group..
+# Splitting : It is a process in which we split data into group by applying some conditions on datasets.
+# Applying : It is a process in which we apply a function to each group independently
+# Combining : It is a process in which we combine different datasets after applying groupby and results into a data structure
+
+data1 = {'Name':['Jai', 'Anuj', 'Jai', 'Princi', 
+                 'Gaurav', 'Anuj', 'Princi', 'Abhi'], 
+        'Age':[27, 24, 22, 32, 
+               33, 36, 27, 32], 
+        'Address':['Nagpur', 'Kanpur', 'Allahabad', 'Kannuaj',
+                   'Jaunpur', 'Kanpur', 'Allahabad', 'Aligarh'], 
+        'Qualification':['Msc', 'MA', 'MCA', 'Phd',
+                         'B.Tech', 'B.com', 'Msc', 'MA']} 
+    
+  
+# Convert the dictionary into DataFrame  
+df = pd.DataFrame(data1)
+  
+print(df) 
+
+df.groupby('Name')
+print(df.groupby('Name').groups)
+
+gk = df.groupby('Name') 
+   
+# Let's print the first entries 
+# in all the groups formed. 
+print(gk.first())
+# And the last one with the grouping method we are not going to cover all the grouping methods
+# but if you want to check out all the methods of the grouping you can go through the
+# GeeksforGeeks documentation of Pandas..
+# at the very last let's cover the using spliting for multiple keys in groupby function().
+df.groupby(['Name', 'Qualification'])
+ 
+print(df.groupby(['Name', 'Qualification']).groups)
+
+# * we can select a single group using Groupby.get_group.
+# selecting a single group
+ 
+grp = df.groupby('Name')
+print(grp.get_group('Jai'))
+
+#   2. * Grouping Rows in Pandas.
+example = {'Team':['Arsenal', 'Manchester United', 'Arsenal', 
+                   'Arsenal', 'Chelsea', 'Manchester United', 
+                   'Manchester United', 'Chelsea', 'Chelsea', 'Chelsea'], 
+                     
+           'Player':['Ozil', 'Pogba', 'Lucas', 'Aubameyang', 
+                       'Hazard', 'Mata', 'Lukaku', 'Morata',  
+                                         'Giroud', 'Kante'], 
+                                           
+           'Goals':[5, 3, 6, 4, 9, 2, 0, 5, 2, 3] } 
+  
+df = pd.DataFrame(example) 
+  
+print(df) 
+
+total_goals = df['Goals'].groupby(df['Team']) 
+  
+# printing the means value 
+print(total_goals.mean()) 
+
+# 3. Combining multiple columns in Pandas groupby with dictionary.
+
+dict = { 
+    "ID":[1, 2, 3], 
+    "Movies":["The Godfather", "Fight Club", "Casablanca"], 
+    "Week_1_Viewers":[30, 30, 40], 
+    "Week_2_Viewers":[60, 40, 80], 
+    "Week_3_Viewers":[40, 20, 20] }; 
+  
+# Convert dictionary to dataframe 
+df = pd.DataFrame(dict); 
+print(df) 
+
+groupby_dict = {"Week_1_Viewers":"Total_Viewers", 
+           "Week_2_Viewers":"Total_Viewers", 
+           "Week_3_Viewers":"Total_Viewers", 
+           "Movies":"Movies" } 
+  
+df = df.set_index('ID') 
+df = df.groupby(groupby_dict, axis = 1).sum() 
+print(df) 
+
+#                       8. Pandas Merging, Joining, and Concatenating..
+
+# 1. We can join, merge, and concat dataframe using different methods. In Dataframe 
+# df.merge(),df.join(), and df.concat() methods help in joining, merging and
+# concating different dataframe.
+
+# It's too easy peasy but important too..
+# Define a dictionary containing employee data 
+data1 = {'Name':['Jai', 'Princi', 'Gaurav', 'Anuj'], 
+        'Age':[27, 24, 22, 32], 
+        'Address':['Nagpur', 'Kanpur', 'Allahabad', 'Kannuaj'], 
+        'Qualification':['Msc', 'MA', 'MCA', 'Phd']} 
+   
+# Define a dictionary containing employee data 
+data2 = {'Name':['Abhi', 'Ayushi', 'Dhiraj', 'Hitesh'], 
+        'Age':[17, 14, 12, 52], 
+        'Address':['Nagpur', 'Kanpur', 'Allahabad', 'Kannuaj'], 
+        'Qualification':['Btech', 'B.A', 'Bcom', 'B.hons']} 
+ 
+# Convert the dictionary into DataFrame  
+df = pd.DataFrame(data1,index=[0, 1, 2, 3])
+ 
+# Convert the dictionary into DataFrame  
+df1 = pd.DataFrame(data2, index=[4, 5, 6, 7])
+
+frames = [df, df1]
+ 
+res1 = pd.concat(frames)
+print(res1)
+
+# Method 2.
+# Now we apply .append() function inorder to concat to dataframe
+
+res = df.append(df1)
+print(res) 
+# The df.append() might be removed because while i was running I got a message from terminal:
+# FutureWarning: The frame.append method is deprecated and will be removed from pandas in 
+# a future version. Use pandas.concat instead.
+
+# 2. Concatenating column with separator.
+data = pd.read_csv("https://media.geeksforgeeks.org/wp-content/uploads/nba.csv")
+print(data)
+# making copy of team column
+new = data["Team"].copy()
+ 
+# concatenating team with name column
+# overwriting name column
+data["Name"]= data["Name"].str.cat(new, sep =", ")
+ 
+# display
+print(data)
+
+# 3. * Handiling null values...
+new = data["Team"].copy()
+ 
+# string to replace null values with
+na_string ="No College"
+ 
+# concatenating team with name column
+# overwriting name column
+data["College"]= data["College"].str.cat(new, sep =", ", na_rep = na_string)
+print(data)
+
+# 4. Pandas Index.append() -> A new type of data structure. But here also we will use append.
+
+df1 = pd.Index([17, 69, 33, 5, 0, 74, 0])
+ 
+# Creating the second Index
+df2 = pd.Index([11, 16, 54, 58])
+ 
+# Print the first and second Index
+print(df1, "\n", df2)
+
+print(df1.append(df2))
+
+# sample 2.
+
+df1 = pd.Index(['Jan','Feb','Mar','Apr'])
+df2 = pd.Index(['May','Jun','Jul','Aug'])
+df3 = pd.Index(['Sep','Oct','Nov','Dec'])
+
+print(df1,"\n ", df2, "\n ", df3)
+
+print(df1.append([df2, df3]))
+
+# [1/2 *] 6. Add a row at top in pandas DataFrame. 
+df = pd.read_csv("https://media.geeksforgeeks.org/wp-content/uploads/nba.csv") 
+ 
+print(df.head(5))
+
+new_row = pd.DataFrame({'Name':'Geeks', 'Team':'Boston', 'Number':3,
+                        'Position':'PG', 'Age':33, 'Height':'6-2',
+                        'Weight':189, 'College':'MIT', 'Salary':99999},
+                                                            index =[0])
+# simply concatenate both dataframes
+df = pd.concat([new_row, df]).reset_index(drop = True)
+print(df.head(5))
+
+# 7. Pandas str.join() to join string/list elements with passed delimiter.
+
+data = pd.read_csv("https://media.geeksforgeeks.org/wp-content/uploads/nba.csv") 
+  
+# dropping null value columns to avoid errors 
+data.dropna(inplace = True) 
+    
+# joining string and overwriting  
+data["Name"]= data["Name"].str.join("-") 
+
+# splitting string and overwriting  
+data["Team"]= data["Team"].str.split("t") 
+# display 
+print(data)
+
+# 8. We can compare two dataframe with the help of df.compare(df1,df2)
+
+# 9. How to compare the elements of the two Pandas Series?
+# Method 1: Using Relational operator -> ==,!=,<,>.
+# Method 2: Using Series.equal() -> Series is just a name here!
+
+#                     9. Working with date and time using Pandas.
+
+# 1. date and time
+data = pd.date_range('1/1/2011', periods = 10, freq='H')
+print(data)
+
+# 2. Moving further in the topic: Creating range of dates and show basic features.
+
+x = pd.datetime.now()
+print(x.month, x.year)
+
+# A new FutureWarning: The pandas.datetime class is deprecated and will be removed from
+# pandas in a future version. Import from datetime module instead.
+
+# 3. *** Current timestamp
+t = pd.Timestamp.now()
+print(t)
+
+print(t.year)
+print(t.month)
+print(t.day)
+print(t.hour)
+print(t.minute)
+print(t.second)
+
+# 4. Pandas Timestamp.timestamp() function return the time expressed as the number of seconds
+# that have passed since January 1, 1970. That zero moment is known as the epoch.
+
+ts = pd.Timestamp(year = 2023,  month = 11, day = 11,  
+                  hour = 8, second = 49, tz = 'US/Central')  
+  
+print(ts.timestamp())
+# 5. U can also use timestamp.now() -> for printing the current time..
+
+# 6. Pandas Timestamp.isoformat()
+# Pandas Timestamp.isoformat() function is used to convert the given Timestamp object into the ISO format.
+print(ts.isoformat()) 
+
+# 7. Using ts.date() u can get the current date
+print(ts.date())
+
+# 8. Pandas Timestamp.replace() function is used to replace the member values of the given Timestamp.
+print(ts.replace(year = 2011))
+# sample 2.
+print(ts.replace(year = 2019, month = 12, hour = 1))
+
+# * 9. pandas.date_range() method.
+# pandas.date_range() is one of the general functions in Pandas which is used to
+# return a fixed frequency DatetimeIndexes.
+
+# Specify start and periods, the number of periods (days). 
+dRan1 = pd.date_range(start ='1-1-2018', periods = 13) 
+  
+# Specify end and periods, the number of periods (days). 
+dRan2 = pd.date_range(end ='1-1-2018', periods = 13) 
+
+# Specify start, end, and periods; the frequency  
+# is generated automatically (linearly spaced). 
+dRan3 = pd.date_range(start ='01-03-1945',  
+            end ='1-1-2018', periods = 20) 
+  
+print(dRan1, "\n\n", dRan2, '\n\n', dRan3)
+# If the range is not big enough so it uses the time interval give in it. Else it uses random
+# dates to full fill the requirement of the range..
+
+#                         9. Pandas Working With Text Data.
+
+# 1. Series and Indexes are equipped with a set of string processing methods that make it easy
+# to operate on each element of the array. Perhaps most importantly, these methods exclude
+# missing/NA values automatically.
+
+data = {'Name':['Jai', 'Princi', 'Gaurav', 'Anuj'], 
+        'Age':[27, 24, 25, 32], 
+        'Address':['Delhi', 'Kanpur', 'Allahabad', 'Kannauj'], 
+        'Qualification':['Msc', 'MA', 'MCA', 'Phd']} 
+   
+# Convert the dictionary into DataFrame  
+df = pd.DataFrame(data) 
+   
+# converting and overwriting values in column 
+print(df)
+
+df["Name"]= df["Name"].str.lower()
+
+df["Qualification"]= df["Qualification"].str.upper()
+
+df["Age"]= df["Age"].replace(25, "Twenty five") 
+
+df["Name"]= df["Name"].str.cat(new, sep =", ") 
+
+print(df)
+
+# 2. At the very end let's see all the str functions in the Pandas str.
+# Pandas str methods:
+
+# FUNCTION	DESCRIPTION
+# str.lower()	Method to convert a string’s characters to lowercase
+# str.upper()	Method to convert a string’s characters to uppercase
+# str.find()	Method is used to search a substring in each string present in a series
+# str.rfind()	Method is used to search a substring in each string present in a series from the Right side
+# str.findall()	Method is also used to find substrings or separators in each string in a series
+# str.isalpha()	Method is used to check if all characters in each string in series are alphabetic(a-z/A-Z)
+# str.isdecimal()	Method is used to check whether all characters in a string are decimal
+# str.title()	Method to capitalize the first letter of every word in a string
+# str.len()	Method returns a count of the number of characters in a string
+# str.replace()	Method replaces a substring within a string with another value that the user provides
+# str.contains()	Method tests if pattern or regex is contained within a string of a Series or Index
+# str.extract()	Extract groups from the first match of regular expression pattern.
+# str.startswith()	Method tests if the start of each string element matches a pattern
+# str.endswith()	Method tests if the end of each string element matches a pattern
+# str.isdigit()	Method is used to check if all characters in each string in series are digits
+# str.lstrip()	Method removes whitespace from the left side (beginning) of a string
+# str.rstrip()	Method removes whitespace from the right side (end) of a string
+# str.strip()	Method to remove leading and trailing whitespace from string
+# str.split()	Method splits a string value, based on an occurrence of a user-specified value
+# str.join()	Method is used to join all elements in list present in a series with passed delimiter
+# str.cat()	Method is used to concatenate strings to the passed caller series of string.
+# str.repeat()	Method is used to repeat string values in the same position of passed series itself
+# str.get()	Method is used to get element at the passed position
+# str.partition()	Method splits the string only at the first occurrence unlike str.split()
+# str.rpartition()	Method splits string only once and that too reversely. It works in a similar way like str.partition() and str.split()
+# str.pad()	Method to add padding (whitespaces or other characters) to every string element in a series
+# str.swapcase()	Method to swap case of each string in a series
+
+# 3. Although, U may have gone through the Numpy documentation too. Now u might know the best function in the 
+# string of numpy is the title(). And luckly we also have the title() in the pandas too.
+
+df["Name"] = df["Name"].str.upper().str.title()
+print(df)
+
+# 4. * Pandas Series.str.replace() to replace text in a series -> [U might be familiar wit this one!].
+
+data = {'text': ['Blue', ' Green ', 'Red ']}
+df = pd.DataFrame(data)
+ 
+df['text'] = df['text'].str.replace(' ', '_')
+print(df)
+
+data['text'].where('text').dropna()
+print(df)
+
+# Owww ! You are really amazing that u reach here at the finishing line of the Pandas library.
+# Thanks for visiting.
+# Bye!
