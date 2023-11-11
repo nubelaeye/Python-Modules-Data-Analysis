@@ -14,9 +14,6 @@
 # 8. Merging, Joining and Concatenating
 # 9. Working with Date and Time
 #10. Working With Text Data
-#11. Working with CSV and Excel files
-#12. Visualization
-
 # Ok then let's get started too!
 #                                   1. Introduction' *****
 # Pandas is an open-source library in Python that is made mainly for working with relational 
