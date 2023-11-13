@@ -1,0 +1,235 @@
+# Hi there, welcome to Matplot library..
+# In this lecture we will cover all the common/important topics of matplotlib
+# So start get exicited !
+
+# Ok then let's start....
+# Matplotlib is easy to use and an amazing visualizing library in Python. It is built on
+# NumPy arrays and designed to work with the broader SciPy stack and consists of 
+# several plots like line, bar, scatter, histogram, etc. 
+
+# Starting with the 1st one..
+
+#                                   1. Introduction...
+
+# Matplotlib:- Matplotlib is easy to use and an amazing visualizing library in Python. 
+# It is built onNumPy arrays and designed to work with the broader SciPy stack and consists
+# of several plots like line, bar, scatter, histogram, etc. 
+
+#   1. Getting Started..
+# let’s create a simple plot. We will be plotting two lists containing the X, Y coordinates for the plot.
+
+# Basic plots in Matplotlib
+
+# Line plot using Matplotlib:-
+# By importing the matplotlib module, defines x and y values for a plots.
+
+# importing matplotlib module 
+from matplotlib import pyplot as plt
+import numpy as np
+# x-axis values
+x = [5, 2, 9, 4, 7]
+# Y-axis values
+y = [10, 5, 8, 4, 2]
+# Function to plot
+plt.plot(x,y)
+# function to show the plot
+plt.show()
+
+# Bar plot using Matplotlib
+
+x = [5, 2, 9, 4, 7]
+# Y-axis values
+y = [10, 5, 8, 4, 2]
+# Function to plot the bar
+plt.bar(x,y)
+# function to show the plot
+plt.show()
+
+# Histogram using Matplotlib
+
+# Y-axis values
+y = [10, 5, 8, 4, 2]
+# Function to plot histogram
+plt.hist(y)
+# Function to show the plot
+plt.show()
+
+# Scatter Plot using Matplotlib
+x = [5, 2, 9, 4, 7]
+# Y-axis values
+y = [10, 5, 8, 4, 2]
+# Function to plot scatter
+plt.scatter(x, y)
+# function to show the plot
+plt.show()
+
+# Creating multiple plots...
+# create data
+x = np.array([1, 2, 3, 4, 5])
+ 
+# making subplots
+fig, ax = plt.subplots(2, 2)
+ 
+# set data with subplots and plot
+ax[0, 0].plot(x, x)
+ax[0, 1].plot(x, x*2)
+ax[1, 0].plot(x, x*x)
+ax[1, 1].plot(x, x*x*x)
+ 
+# set the title to subplots
+ax[0, 0].set_title("Linear") # This is how u put the title in plot().
+ax[0, 1].set_title("Double") 
+ax[1, 0].set_title("Square")
+ax[1, 1].set_title("Cube")
+ 
+# set spacing
+fig.tight_layout()
+plt.show()
+
+# Setting a Single Title for All the Subplots by -> fig.suptitle().
+
+# * Three-dimensional Plotting in Python using Matplotlib.
+
+fig = plt.figure()
+ax = plt.axes(projection='3d')
+
+# 3-Dimensional Line Graph Using Matplotlib.
+from mpl_toolkits import mplot3d
+
+fig = plt.figure()
+ 
+# syntax for 3-D projection
+ax = plt.axes(projection ='3d')
+ 
+# defining all 3 axis
+z = np.linspace(0, 1, 100)
+x = z * np.sin(25 * z)
+y = z * np.cos(25 * z)
+ 
+# plotting
+ax.plot3D(x, y, z, 'green')
+ax.set_title('3D line plot geeks for geeks')
+plt.show()
+
+# 3-Dimensional Scattered Graph Using Matplotlib.
+fig = plt.figure()
+ 
+# syntax for 3-D projection
+ax = plt.axes(projection ='3d')
+ 
+# defining axes
+z = np.linspace(0, 1, 100)
+x = z * np.sin(25 * z)
+y = z * np.cos(25 * z)
+c = x + y
+ax.scatter(x, y, z, c = c)
+ 
+# syntax for plotting
+ax.set_title('3d Scatter plot geeks for geeks')
+plt.show()
+
+# Surface Graphs using Matplotlib library  
+
+x = np.outer(np.linspace(-2, 2, 10), np.ones(10))
+y = x.copy().T
+z = np.cos(x ** 2 + y ** 3)
+ 
+fig = plt.figure()
+ 
+# syntax for 3-D plotting
+ax = plt.axes(projection='3d')
+ 
+# syntax for plotting
+ax.plot_surface(x, y, z, cmap='viridis',\
+                edgecolor='green')
+ax.set_title('Surface plot geeks for geeks')
+plt.show()
+
+# Wireframes graph using Matplotlib library 
+def f(x, y):
+    return np.sin(np.sqrt(x ** 2 + y ** 2))
+ 
+# x and y axis
+x = np.linspace(-1, 5, 10)
+y = np.linspace(-1, 5, 10)
+  
+X, Y = np.meshgrid(x, y)
+Z = f(X, Y)
+ 
+fig = plt.figure()
+ax = plt.axes(projection ='3d')
+ax.plot_wireframe(X, Y, Z, color ='green')
+ax.set_title('wireframe geeks for geeks')
+
+# Contour Graphs using Matplotlib library.
+
+def function(x, y):
+    return np.sin(np.sqrt(x ** 2 + y ** 2))
+ 
+ 
+x = np.linspace(-10, 10, 40)
+y = np.linspace(-10, 10, 40)
+ 
+X, Y = np.meshgrid(x, y)
+Z = function(X, Y)
+ 
+fig = plt.figure(figsize=(10, 8))
+ax = plt.axes(projection='3d')
+ 
+ax.plot_surface(X, Y, Z, cmap='cool', alpha=0.8)
+ 
+ax.set_title('3D Contour Plot of function(x, y) =\
+                sin(sqrt(x^2 + y^2))', fontsize=14)
+ax.set_xlabel('x', fontsize=12)
+ax.set_ylabel('y', fontsize=12)
+ax.set_zlabel('z', fontsize=12)
+ 
+plt.show()
+
+# Calculating the area of an image using Matplotlib.
+
+# read an image
+img = plt.imread("sample.jpg")
+ 
+# fetch the height and width
+height, width, _ = img.shape
+ 
+# area is calculated as “height x width”
+area = height * width
+ 
+# display the area
+print("Area of the image is : ", area)
+
+# In Matplotlib creating a legend(symbol recognizing the data give in the plot).
+# X-axis values 
+x = [1, 2, 3, 4, 5] 
+  
+# Y-axis values  
+y = [1, 4, 9, 16, 25] 
+  
+# Function to plot   
+plt.plot(x, y) 
+  
+# Function add a legend   
+plt.legend(['single element']) 
+  
+# function to show the plot 
+plt.show() 
+
+# sample 2.
+y1 = [2, 3, 4.5] 
+  
+# Y-axis values  
+y2 = [1, 1.5, 5] 
+  
+# Function to plot   
+plt.plot(y1) 
+plt.plot(y2) 
+  
+# Function add a legend   
+plt.legend(["blue", "green"], loc ="lower right") 
+  
+# function to show the plot 
+plt.show()
+ 
+# Finished!
