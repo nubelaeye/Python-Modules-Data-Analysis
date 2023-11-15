@@ -1,0 +1,332 @@
+# Data Analysis with Python.
+
+# Data Analysis is the technique of collecting, transforming, and organizing data to make future
+# predictions and informed data-driven decisions. It also helps to find possible solutions for
+# a business problem. There are six steps for Data Analysis. They are:-
+#   Ask or Specify Data Requirements
+#   Prepare or Collect Data
+#   Clean and Process
+#   Analyze
+#   Share
+#   Act or Report.
+
+# Broadcasting... [It's related with the numpy array function.]
+# The term broadcasting refers to how numpy treats arrays with different Dimension during
+# arithmetic operations which lead to certain constraints, the smaller array is broadcast
+# across the larger array so that they have compatible shapes. 
+
+# Table of Content :-
+
+# What is Data Analysis?
+# Why Data Analysis is important?
+# Types of Data Analysis Methods
+# What is the Data Analysis Process?
+# Top Data Analysis Tools
+
+# * What is Data Analysis ?
+# Before jumping into the term “Data Analysis”, let’s discuss the term “Analysis”. Analysis 
+# is a process of answering “How?” and “Why?”. For example, how was the growth of XYZ Company
+# in the last quarter? Or why did the sales of XYZ Company drop last summer? So to answer those
+# questions we take the data that we already have. Out of that, we filter out what we need. 
+# This filtered data is the final dataset of the larger chunk that we have already collected
+# and that becomes the target of data analysis.
+
+# * Why Data Analysis is important ?
+    # 1. Decision Making.
+    # 2. Identifying Trends and Pattern.
+    # 3. Risk Management.
+    # 4. Cost Reduction. 
+    # 5. Personlizatoin.
+
+# Types of Data Analysis Methods...
+
+# The major Data Analysis methods are:
+    # 1. Descriptive Analysis
+    # 2. Diagnostic Analysis
+    # 3. Predictive Analysis
+    # 4. Prescriptive Analysis
+    # 5. Statistical Analysis
+
+# Small discription about tyesp of data analysis..
+
+# 1. Descriptive Analysis -> A Descriptive Analysis looks at data and analyzes past events 
+#   for insight as to how to approach future events.
+
+# 2. Diagnostic Analysis -> It basically gives a detailed explanation of a particular scenario
+#   by understanding behavior patterns.
+
+# 3. Predictive Analysis -> Information we have received from descriptive and diagnostic analysis,
+#   we can use that information to predict future data. it basically finds out what is likely 
+#   to happen in the future.
+
+# 4. Prescriptive Analysis -> This is an advanced method of Predictive Analysis. Now when you
+#   predict something or when you start thinking out of the box you will definitely have 
+#   a lot of options, and then we get confused as to which option will actually work. 
+#   Prescriptive Analysis helps to find which is the best option to make it happen or work. 
+
+# 5. Statistical Analysis -> Statistical Analysis is a statistical approach or technique for
+#   analyzing data sets in order to summarize their important and main characteristics 
+#   generally by using some visual aids.
+
+# What is the Data Analysis Process ?
+# A Data analysis has the ability to transform raw available data into meaningful insights 
+# for your business and your decision-making. There are six general steps...
+    # 1. Specify Data Requirements
+    # 2. Collect Data
+    # 3. Clean and Process the Data
+    # 4. Analyse the Data
+    # 5. Interpretation
+    # 6. Report
+
+# And for moving further you just know the Numpy, Pandas, Matplotlib, Seaborn, Basic Tensorflow
+
+# And now let's move to the other side of wall. They are Last three 3 things to get started with
+# the Data Analysis.
+
+# 1. Data Analysis with SciPy :-
+#       SciPy is a python library that is useful in solving many mathematical equations and algorithms.
+# It is designed on the top of Numpy library that gives more extension of finding scientific 
+# mathematical formulae like Matrix Rank, Inverse, polynomial equations, LU Decomposition, etc.
+# It has many user-friendly, efficient and easy-to-use functions that helps to solve problems
+# like numerical integration, interpolation, optimization, linear algebra and statistics.
+
+import numpy as np 
+from scipy import linalg 
+import scipy.integrate
+
+A = np.array([[1,2,3],[4,5,6],[7,8,8]]) 
+
+#       Linear Algebra. 
+
+# 1. Compute the determinant of a matrix 
+linalg.det(A) 
+
+# 2. Compute pivoted LU decomposition of a matrix
+P, L, U = linalg.lu(A) 
+print(P) 
+print(L) 
+print(U) 
+# print LU decomposition 
+print(np.dot(L,U)) 
+
+# 3. Eigen values and eigen vectors of this matrix.
+eigen_values, eigen_vectors = linalg.eig(A) 
+print(eigen_values) 
+print(eigen_vectors) 
+
+# 4. Solving systems of linear equations can also be done.
+v = np.array([[2],[3],[5]]) 
+print(v) 
+s = linalg.solve(A,v) 
+print(s) 
+
+#       Integration 
+
+# For solving the intergrals probs u have to import scipy.integrate.
+
+# Single Integrals
+# The Quad routine is the important function out of SciPy’s integration functions(a to b f(x)dx)
+f= lambda x:np.exp(-x**2) 
+# print results 
+i = scipy.integrate.quad(f, 0, 1) 
+print(i) 
+
+# Double Integrals
+# The parameters of dblquad function is scipy.integrate.dblquad(f, a, b, g, h).
+# 0 to 1 & 1 to 2 x*y^2 dx dy.
+
+f = lambda y, x: x*y**2
+i = scipy.integrate.dblquad(f, 0, 2, lambda x: 0, lambda x: 1) 
+# print the results 
+print(i) 
+
+# 2. Python Plotly:-
+# Python Plotly Library is an open-source library that can be used for data visualization
+# and understanding data simply and easily. Plotly supports various types of plots like
+# line charts, scatter plots, histograms, cox plots, etc.
+
+# Ok then, let's see how it looks like.
+import plotly.express as px 
+
+# Creating the Figure instance 
+fig = px.line(x=[1, 2, 3], y=[1, 2, 3]) 
+
+# showing the plot 
+fig.show()
+
+# Creating Different Types of Charts.
+# With plotly we can create more than 40 charts and every plot can be created using the 
+# plotly.express and plotly.graph_objects class. Let’s see some commonly used charts with
+# the help of Plotly.
+
+df = px.data.iris()   
+
+# * 1. Line Chart
+fig = px.line(df, x="species", y="petal_width")  
+# * 2. Bar Chart
+fig = px.bar(df, x="species", y="petal_width")  
+# * 3. Histogram
+fig = px.histogram(df, x="species", y="petal_width")  
+# 4. Scatter Plot and Bubble charts
+#    1. Scatter Plot
+fig = px.scatter(df, x="species", y="petal_width")  
+#   2.* Bubble chart
+fig = px.scatter(df, x="species", y="petal_width",  
+                 size="petal_length", color="species") 
+# * 5. Pie Charts
+fig = px.pie(df, x="species", y="petal_width")  
+# 6. Box Plots
+fig = px.box(df, x="species", y="petal_width")  
+# 7.Violin Plot.
+fig = px.violin(df, x="species", y="petal_width")  
+# 8. Contour Plots[Not that much important]
+
+import plotly.graph_objects as go  
+
+# Creating the X, Y value that will 
+# change the values of Z as a function 
+feature_x = np.arange(0, 50, 2)  
+feature_y = np.arange(0, 50, 3)  
+  
+# Creating 2-D grid of features  
+[X, Y] = np.meshgrid(feature_x, feature_y)  
+  
+Z = np.cos(X / 2) + np.sin(Y / 4)  
+  
+# plotting the figure 
+fig = go.Figure(data =
+    go.Contour(x = feature_x, y = feature_y, z = Z))  
+
+# 9. 3D Line Plots
+df = px.data.tips()  
+  
+# plotting the figure 
+fig = px.line_3d(df, x="sex", y="day",  
+                 z="time", color="sex")  
+  
+# 10. 3D Scatter Plot
+df = px.data.iris()  
+  
+# Plotting the figure 
+fig = px.scatter_3d(df, x = 'sepal_width',  
+                    y = 'sepal_length',  
+                    z = 'petal_width',  
+                    color = 'species') 
+
+# 11. 3D surface plot.
+x = np.outer(np.linspace(-2, 2, 30), np.ones(30))  
+y = x.copy().T  
+z = np.cos(x ** 2 + y ** 2)  
+  
+# plotting the figure 
+fig = go.Figure(data=[go.Surface(x=x, y=y, z=z)])  
+
+# showing the plot 
+fig.show()
+
+# Now let's cover the another library -> [" Bokeh "].
+# Bokeh is a Python interactive data visualization. Unlike Matplotlib and Seaborn, Bokeh renders
+# its plots using HTML and JavaScript. It targets modern web browsers for presentation 
+# providing elegant, concise construction of novel graphics with high-performance interactivity.
+
+# * 1. Exploratory Data Analysis.. [EDA].
+
+    # 1. Univariate data -> This type of data consists of only one variable.
+    #       example -> [Heights(in cm) 164, 167.3, 170, 174.3, 178, 180]
+
+    # 2. Bivariate data -> This type of data involves two different variables.
+    #       example -> [[temperature -> 10,20, 35],[ICE CREAM SALES -> 2000, 3780, 5430]]
+
+    # 3. Multivariate data -> When the data involves three or more variables, it is categorized under multivariate.
+    #       example -> [[temperature -> 10,20, 35],[ICE CREAM SALES -> 2000, 3780, 5430],[children -> 200, 345, 400]]
+
+# 2. Measures of central tendency in Statistics..
+# Central Tendencies in Statistics are the numerical values that are used to represent 
+# mid-value or central value a large collection of numerical data. These obtained numerical
+# values are called central or average values in Statistics.
+
+# Some of the most commonly used measures of central tendency are:
+    # Mean
+    # Median
+    # Mode
+
+
+# Mean for Ungrouped Data -> Same as we take out the mean.
+# Mean for Grouped Data -> let's say, Xi => [4,6,15,10,9], Fi => [5,10,8,7,10]
+#   here we have to, {x}= (4×5 + 6×10 + 15×8 + 10×7 + 9×10) ÷ (5 + 10 + 8 + 7 + 10)
+# ⇒ {x} = (20 + 60 + 120 + 70 + 90) ÷ 40
+# ⇒ {x} = 360 ÷ 40
+# ⇒ {x} = 9...
+
+# Mean can be classified into three different class groups which are
+
+# Arithmetic Mean -> AM = sum of all observation/total number of observation.
+# Geometric Mean -> GM = n√x1.x2...xN 0r x1.x2...xN/n
+# Harmonic Mean -> HM = n / [Sum of (1/Xi)] 
+
+# Median of Ungrouped Data - If n is odd -> Median = Value of observation at [(n + 1) ÷ 2]th Position.
+# If n is even -> Median = Arithmetic mean of Values of observations at (n ÷ 2)th and [(n ÷ 2) + 1]th Position.
+#     ex if n is even -> elements = [2,3,3,3,7,9,9,14,23,27] -> (7+9)/2 = 8
+# Median of Grouped Data -> MG = l + (n/2-Cf / f) x h.
+# l is the lower limit of median class,
+# n is the total number of observations,
+# cf is the cumulative frequency of the preceding class,
+# f is the frequency of each class, and 
+# h is the class size.
+
+# Mode -> Ungrouped Data can be calculated just by looking through the elements & count the highest occuring element.
+# Mode for Grouped Data -> 1 + [(f1-f0) / (2f1-f0-f2)] x h
+# l is the lower class limit of modal class, 
+# h is the class size, 
+# f1 is the frequency of modal class, 
+# f0 is the frequency of class which proceeds the modal class, and 
+# f2 is the frequency of class which succeeds the modal class.
+
+# Example: Find the mode of the dataset which is given as follows.
+
+# Class Interval -> 10-20	20-30	30-40	40-50	50-60
+# Frequency	-> 5  8	 12	 16	 10
+# As the class interval with the highest frequency is 40-50, which has a frequency of 16. Thus, 40-50 is the modal class. 
+# Thus, l  = 40 , h = 10 , f1 = 16 , f0 = 12 , f2 = 10 
+# Plugging in the values in formula \bold{Mode = l +\left [\frac{f_1-f_0}{2f_1-f_0-f_2}\right]×h}               , we get
+# Mode = 40 + (16 – 12)/(2 × 16 – 12 – 10) × 10
+# ⇒ Mode = 40 + (4/10)×10
+# ⇒ Mode = 40 + 4
+# ⇒ Mode = 44
+
+# Therefore, the mode for this set of data is 44.
+
+# Measures of spread – Range, Variance, and Standard Deviation
+# Collecting the data and representing it in form of tables, graphs, and other distributions
+# is essential for us. But, it is also essential that we get a fair idea about how the data
+# is distributed, how scattered it is, and what is the mean of the data.
+
+#   The dispersion, which is also called scatter is measured on the basis of the type of chosen
+# central tendency and the observations available to us. These measures tell us how much the 
+# observations are varied or similar to each other.
+
+# There are many ways of measuring the dispersion in the data, some major ways to measure 
+# the spread are given below: 
+    # Range 
+    # Variance 
+    # Standard Deviation 
+    
+# 1. Range -> The range of the data is given as the difference between the maximum and 
+# the minimum values of the observations in the data.
+
+# Variance -> The variance of the data is given by measuring the distance of the observed
+# values from the mean of the distribution. Here we are not concerned with the sign of the
+# distance of the point, we are more interested in the magnitude. So, we take squares of
+# the distance from the mean.
+
+# We can take out the variance by -> varance = ∑(0-n) (Xi- mean(x))^2/n
+
+# Standard Deviation
+# In the calculation of variance, notice that the units of the variance and the unit of the
+# observations are not the same.
+
+# We can take out the standard deviation just by putting a square root outside the variance 
+# formula...
+
+# 3. Interquartile Range and Quartile Deviation using NumPy and SciPy
+
