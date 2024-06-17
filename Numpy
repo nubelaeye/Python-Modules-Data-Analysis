@@ -229,8 +229,11 @@ print(np.bitwise_or(10,11))
 # 3.numpy.bitwise_xor()..
 print(np.bitwise_xor(10,11))
 
-# 4.numpy.invert() -> I think it returns the changed sign of input and add 1 if positive and substracts 1 if negative.
+# 4.numpy.invert() -> It returns the changed sign of input and add 1 if positive and substracts 1 if negative.
+# Means the the positive number will be converted into negative and substracted by 1. And if the number is already 
+# negative then the number will be converted into positive and added by 1.
 print(np.invert([10,11]))
+# Output : [-11  10]
 
 # 5.numpy.left_shift()..
 print(np.left_shift(5,2))
