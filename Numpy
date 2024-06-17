@@ -16,7 +16,7 @@ print(id(arr))
 print(id(nc))
 
 # View: This is also known as Shallow Copy. The view is just a view of the original array 
-# and view does not own the data. When we make changes to the view it affects the original 
+# and view does not own the data. But when we make changes to the view it affects the original 
 # array, and when changes are made to the original array it affects the view.
 
 # sample..
