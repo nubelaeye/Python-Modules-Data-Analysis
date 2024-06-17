@@ -304,9 +304,10 @@ print(string.strip())
 str = '@@@@Geeks for Geeks@@@@@'
 print(str.strip('@'))
 
-# 4. numpy.title() -> mine favorite it converts the lower into upper.
+# 4. numpy.title() -> mine favorite it converts the first lower letter into upper letter.
 
 print("geeks_for_geeks".title())
+# Oupupt : 'Geeks_For_Geeks'
 
 # * 5. numpy.count() -> 2nd favorite it counts the number of occerence.
 
