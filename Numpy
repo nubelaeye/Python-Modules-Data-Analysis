@@ -197,7 +197,7 @@ print(b)
     # Operations on it...
         # numpy.add(), mumpy.substract() , numpy.divide() &
         # matrix multiplication:- numpyp.mul(a,b), dot(a,b), (a @ b) -> numpy's swagg!
-        # dot(), sqrt(), sum(), arr.T(Transpose), ones(), eye(), idsetity(), np.eigvals()
+        # dot(), sqrt(), sum(), arr.T(Transpose), ones(), eye(), identity(), np.eigvals()
     # Variance is a measure of how data points differ from the mean.
         #  With the help of Numpy matrix.var() method, we can find the variance of a matrix.
         # by using the matrix.var() method.
