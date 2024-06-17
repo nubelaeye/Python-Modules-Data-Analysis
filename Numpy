@@ -174,7 +174,7 @@ print("array2 ", arr2)
 # print union of the two arrays 
 print("Union of two arrays :", np.union1d(arr3, arr4))
 
-# The trim_zeros is used to trim(remove) elements which are deuplicate in the array in starting
+# The trim_zeros is used to trim(remove) elements which are duplicate in the array in starting
 # and in the ending of the array...
 
 
@@ -196,7 +196,7 @@ print(b)
 # MATRIX MALIIPULICATION.....
     # Operations on it...
         # numpy.add(), mumpy.substract() , numpy.divide() &
-        # matrix multiplication:- numpyp.mul(a,b), dot(a,b), (a @ b) -> numpy swagg!
+        # matrix multiplication:- numpyp.mul(a,b), dot(a,b), (a @ b) -> numpy's swagg!
         # dot(), sqrt(), sum(), arr.T(Transpose), ones(), eye(), idsetity(), np.eigvals()
     # Variance is a measure of how data points differ from the mean.
         #  With the help of Numpy matrix.var() method, we can find the variance of a matrix.
