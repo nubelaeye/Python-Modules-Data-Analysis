@@ -426,14 +426,6 @@ print("\nInverse of A:\n", np.linalg.inv(A))
 # 5. Matrix raised to power n
 print("\nMatrix A raised to power 3:\n",
            np.linalg.matrix_power(A, 3))
-# 6. Det() -> returns the determinant of the matrix..
-A = np.array([[6, 1, 1],
-              [4, -2, 5],
-              [2, 8, 7]])
- 
- 
-print(("\nDeterminant of A:"
-     , np.linalg.det(A)))
 
 # Random functions() in numpy makes better to work with numpy arrays..
 # numpy.random.shuffle() method, we can get the random positioning of different integer
@@ -451,10 +443,10 @@ print(gfg)
 gfg = np.arange(16).reshape((4, 4)) 
 # Using shuffle() method 
 np.random.shuffle(gfg) 
-  
+
 print(gfg)
 
-# * numpy.random.geometric() in Python
+# * numpy.random.geometric() in Python | Or | not needed if you already imported the numpy module !.
 import matplotlib.pyplot as plt 
   
 # Using geometric() method 
@@ -464,8 +456,8 @@ count, bins, ignored = plt.hist(gfg, 40, density = True)
 plt.show()
 
 # Sorting and Searching in NumPy Array
-# Numpy provides various methods for searching different kinds of numerical values, in this
-# article, we will cover two important ones:-
+# Numpy provides various methods for searching different kinds of numerical values,
+# we will cover only two important ones:-
     # 1. numpy.where()
     # 2. numpy.searchsorted()
     
@@ -475,7 +467,7 @@ arr = np.array([10, 32, 30, 50, 20, 82, 91, 45])
 #  printing arr 
 print("arr = {}".format(arr)) 
   
-#  looking for value 30 in arr and storing its index in i 
+# searching for value 30 in arr and storing its index in i 
 i = np.where(arr == 30) 
 print(i)
 
@@ -515,7 +507,7 @@ print(("\nIndices of Max element : "
 
 # Counting...
 a = np.count_nonzero([[0,1,7,0,0],[3,0,0,2,19]])
-b = np.count_nonzero([[0,1,7,0,0],[3,0,0,2,19]], axis=0)
+b = np.count_nonzero([[0,1,7,0,0],[3,0,0,2,19]], axis=0) # The 'axis' keystroke is just for defining the dimension !
  
 print("Number of nonzero values is :",a)
 print("Number of nonzero values is :",b)
@@ -523,7 +515,7 @@ print("Number of nonzero values is :",b)
 # Numpy | Universal functions..
 
 # amin, amax -> returns minimum or maximum of an array or along an axis
-# ptp -> returns range of values (maximum-minimum) of an array or along an axis
+# ptp -> returns range of values (maximum-minimum) of an array or along a axis
 # median ->	compute median of data along specified axis
 # mean -> compute mean of data along specified axis
 # std -> compute standard deviation of data along specified axis
@@ -548,6 +540,6 @@ numpydata = np.asarray(img)
 # data
 print(numpydata)
 
-# Well done you are awesome if you reached till here because this is the end of this file.
+# Well done you are awesome if you reached till here because this is the end of this (Vast + Very Important) Numpy Module.
 # Well I hope you would understand all the topics and have a flow on it...
 # Thanks for reading BYE!
